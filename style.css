@@ -21,7 +21,7 @@ button { color: inherit; }
 .icon-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
 svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 
-.app-shell { display: grid; grid-template-columns: 236px minmax(0, 1fr); max-width: 1600px; min-height: calc(100vh - 94px); margin: 0 auto; }
+.app-shell { display: grid; grid-template-columns: 236px minmax(0, 1fr); width: 100%; max-width: none; min-height: calc(100vh - 94px); margin: 0; }
 .sidebar { position: sticky; top: 0; display: flex; height: calc(100vh - 94px); min-height: 620px; flex-direction: column; padding: 29px 20px 18px 25px; border-right: 1px solid #f3e8eb; background: #fffdfd; }
 .brand { display: flex; align-items: center; gap: 9px; margin: 0 0 52px 4px; color: var(--ink); text-decoration: none; font-family: var(--serif); font-size: 27px; font-weight: 700; letter-spacing: 0; }
 .brand-flower { color: var(--rose); font-family: var(--sans); font-size: 31px; line-height: 1; }
@@ -777,6 +777,30 @@ html[data-theme="light"] .brand-mark {
   .row-heart { grid-column: 3; grid-row: 1; }
 }
 
+
+
+/* Full-width desktop shell: sidebar touches the right edge of the viewport */
+@media (min-width: 761px) {
+  html, body {
+    width: 100%;
+  }
+  .app-shell {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    grid-template-columns: minmax(0, 1fr) 236px;
+  }
+  .sidebar {
+    grid-column: 2;
+    justify-self: stretch;
+  }
+}
+@media (min-width: 761px) and (max-width: 1050px) {
+  .app-shell {
+    grid-template-columns: minmax(0, 1fr) 195px;
+  }
+}
 
 /* Layout update: move the desktop navigation sidebar to the RIGHT */
 @media (min-width: 761px) {

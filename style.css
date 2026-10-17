@@ -717,3 +717,97 @@ html[data-theme="light"] .brand-mark {
   box-shadow: 3px 3px 0 #00aeca;
   color: #ff53c8;
 }
+
+/* FIX: keep playlist add/remove controls on the same line as each track */
+.table-header,
+.track-row {
+  grid-template-columns: 34px minmax(185px, 1.5fr) minmax(95px, 1fr) 34px 34px 54px 26px;
+}
+
+/* The header has no labels above the add/remove buttons, so reserve those columns. */
+.table-header span:first-child { grid-column: 1; }
+.table-header span:nth-child(2) { grid-column: 2; }
+.table-header span:nth-child(3) { grid-column: 3; }
+.table-header span:last-child { grid-column: 6; }
+
+.row-add-playlist {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  justify-self: center;
+  border: 0;
+  background: transparent;
+  color: #c9acd0;
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+}
+.row-add-playlist:hover { color: var(--rose); }
+
+.row-remove {
+  grid-column: 7;
+  grid-row: 1;
+  justify-self: center;
+  align-self: center;
+}
+
+@media (max-width: 760px) {
+  .table-header,
+  .track-row {
+    grid-template-columns: 24px minmax(0, 1fr) 32px 30px 26px;
+    column-gap: 5px;
+    padding-right: 7px;
+    padding-left: 7px;
+  }
+
+  .table-header span:nth-child(3),
+  .table-header span:nth-child(4),
+  .table-header span:last-child,
+  .track-album,
+  .track-duration {
+    display: none;
+  }
+
+  .table-header span:first-child { grid-column: 1; }
+  .table-header span:nth-child(2) { grid-column: 2; }
+
+  .row-remove { grid-column: 5; grid-row: 1; }
+  .row-add-playlist { grid-column: 4; grid-row: 1; }
+  .row-heart { grid-column: 3; grid-row: 1; }
+}
+
+
+/* Layout update: move the desktop navigation sidebar to the RIGHT */
+@media (min-width: 761px) {
+  .app-shell {
+    grid-template-columns: minmax(0, 1fr) 236px;
+  }
+  .sidebar {
+    grid-column: 2;
+    grid-row: 1;
+    border-right: 0;
+    border-left: 2px solid #f2d5e6;
+  }
+  .main-content {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  html[data-theme="neon"] .sidebar {
+    border-left-color: #54234c;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1050px) {
+  .app-shell {
+    grid-template-columns: minmax(0, 1fr) 195px;
+  }
+}
+
+/* On narrow screens keep the compact navigation above the content. */
+@media (max-width: 760px) {
+  .sidebar {
+    border-left: 0;
+    border-right: 0;
+  }
+}

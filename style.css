@@ -835,3 +835,59 @@ html[data-theme="light"] .brand-mark {
     border-right: 0;
   }
 }
+
+
+/* MultiKpop: retro synthwave city artwork in the existing hero card */
+.hero-art-image,
+html[data-theme="neon"] .hero-art-image,
+html[data-theme="light"] .hero-art-image {
+  background-image: url("retro-city.png") !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  image-rendering: auto !important;
+}
+.hero-art-image::before,
+.hero-art-image::after,
+html[data-theme="neon"] .hero-art-image::before,
+html[data-theme="neon"] .hero-art-image::after,
+html[data-theme="light"] .hero-art-image::before,
+html[data-theme="light"] .hero-art-image::after {
+  display: none !important;
+  content: none !important;
+}
+
+
+/* Sidebar note: replace the ENTIRE note card with the user's supplied Pepe sticker */
+.sidebar-note {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 190px !important;
+  aspect-ratio: 1 / 1 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: auto 1px 4px !important;
+  transform: translateY(10px) !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  background-image: url("pepe-emote-user-image.png") !important;
+  background-position: center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  box-shadow: none !important;
+}
+.sidebar-note .note-mark,
+.sidebar-note p,
+.sidebar-note .note-sparkle {
+  display: none !important;
+}
+@media (max-width: 760px) {
+  .sidebar-note {
+    display: none !important;
+  }
+}
+

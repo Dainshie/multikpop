@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="pl">
+<html lang="pl" data-theme="neon">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f8e8ed" />
+    <meta name="theme-color" content="#100914" />
     <title>Multi Kpop</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <script src="music/library.js" defer></script>
     <script src="music-player.js" defer></script>
@@ -24,13 +24,15 @@
       <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="m18 14 4 4-4 4m0-20 4 4-4 4M2 18h2a6 6 0 0 0 4.2-1.7l7.6-8.6A6 6 0 0 1 20 6h2M2 6h2a6 6 0 0 1 4.2 1.7l1.2 1.4m4.4 5 1.8 2A6 6 0 0 0 20 18h2" /></symbol>
       <symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4m14-3v2a3 3 0 0 1-3 3H3" /></symbol>
       <symbol id="i-volume" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4zm4 4a5 5 0 0 1 0 6m3-9a9 9 0 0 1 0 12" /></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5a8.5 8.5 0 1 0 12 12Z" /></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" /></symbol>
       <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1" /><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /></symbol>
     </svg>
 
     <div class="app-shell">
       <aside class="sidebar" aria-label="Nawigacja">
         <a class="brand" href="#home" aria-label="Multi Kpop — strona główna">
-          <span class="brand-flower" aria-hidden="true">✿</span>
+          <span class="brand-mark" aria-hidden="true">▣</span>
           <span>Multi<span class="brand-light">Kpop</span></span>
         </a>
 
@@ -46,9 +48,9 @@
         <div class="mood-list" id="artist-filters-side"><button class="mood-item selected" data-filter="all"><span class="mood-dot dot-pink"></span>Cała kolekcja</button></div>
 
         <div class="sidebar-note">
-          <span class="note-flower" aria-hidden="true">✿</span>
-          <p>małe piosenki,<br />duże uczucia</p>
-          <span class="note-sparkle" aria-hidden="true">✳</span>
+          <span class="note-mark" aria-hidden="true">///</span>
+          <p>nocny tryb,<br />głośne uczucia</p>
+          <span class="note-sparkle" aria-hidden="true">✕</span>
         </div>
         <p class="sidebar-footer">Zrobione z miłości do muzyki <span>♥</span></p>
       </aside>
@@ -61,31 +63,35 @@
             <input id="search-input" type="search" placeholder="Szukaj artysty lub utworu" autocomplete="off" />
             <kbd>/</kbd>
           </label>
+          <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Włącz ciemny motyw" aria-pressed="false" title="Włącz ciemny motyw">
+            <svg class="theme-icon-moon" aria-hidden="true"><use href="#i-moon" /></svg>
+            <svg class="theme-icon-sun" aria-hidden="true"><use href="#i-sun" /></svg>
+          </button>
           <button class="profile-chip" type="button" aria-label="Profil słuchacza"><span class="profile-avatar">M</span><span>muzykatv</span><span class="profile-caret">⌄</span></button>
         </header>
 
         <section class="hero" aria-labelledby="hero-title">
           <div class="hero-copy">
-            <p class="eyebrow"><span class="eyebrow-flower">✿</span> PLAYLISTA NA DZIŚ <span class="eyebrow-line"></span></p>
-            <h1 id="hero-title">Muzyka w<br /><em>rozkwicie.</em></h1>
-            <p class="hero-description">Piosenki od artystów: Young Multi i J.Y. Park (również znany jako Jypapi)</p>
+            <p class="eyebrow"><span class="eyebrow-flower">///</span> SIGNAL 01 <span class="eyebrow-line"></span></p>
+            <h1 id="hero-title">TRYB<br /><em>HYPERPOP</em></h1>
+            <p class="hero-description">Neonowe bity, ciężki bas i zero ciszy. Young Multi, J.Y. Park i ty.</p>
             <button class="primary-button" id="hero-play"><svg><use href="#i-play" /></svg><span>Odtwórz miks</span></button>
           </div>
-          <div class="hero-art" aria-label="Różowe kwiaty w słońcu">
+          <div class="hero-art" aria-label="Pikselowa grafika cyberpunkowa">
             <div class="hero-art-image"></div>
-            <span class="hero-sticker sticker-top">sounds<br />like spring</span>
-            <span class="hero-sticker sticker-bottom">✿</span>
-            <span class="hero-caption">kwiaty na repeat</span>
+            <span class="hero-sticker sticker-top">NO SLEEP<br />JUST BEATS</span>
+            <span class="hero-sticker sticker-bottom"><span class="pixel-flower" aria-hidden="true"></span></span>
+            <span class="hero-caption">SIGNAL: ONLINE</span>
           </div>
-          <span class="hero-orbit orbit-one" aria-hidden="true">✿</span>
-          <span class="hero-orbit orbit-two" aria-hidden="true">✳</span>
+          <span class="hero-orbit orbit-one" aria-hidden="true">✦</span>
+          <span class="hero-orbit orbit-two" aria-hidden="true">+</span>
         </section>
 
         <section class="tracks-section" aria-labelledby="tracks-heading">
           <div class="section-heading">
             <div>
               <p class="section-kicker">WYBRANE DLA CIEBIE</p>
-              <h2 id="tracks-heading">Dźwięki <em>na dziś</em><span class="heading-flower">✿</span></h2>
+              <h2 id="tracks-heading">TWOJE <em>UTWORY</em><span class="heading-flower">///</span></h2>
             </div>
             <div class="section-actions">
               <span class="track-count" id="track-count">0 utworów</span>
@@ -102,14 +108,14 @@
           </div>
         </section>
 
-        <footer class="page-footer"><span>✿</span> Niech dzień zakwitnie Twoim soundtrackiem. <span>✿</span></footer>
+        <footer class="page-footer"><span>///</span> SYSTEM ONLINE · GŁOŚNOŚĆ BEZ LIMITU <span>///</span></footer>
       </main>
     </div>
 
     <section class="player" aria-label="Odtwarzacz">
       <div class="now-playing">
-        <div id="current-cover" class="current-cover"><span>✿</span></div>
-        <div class="current-meta"><strong id="current-title">Wybierz coś dla siebie</strong><span id="current-artist">ogród czeka na pierwszy utwór</span></div>
+        <div id="current-cover" class="current-cover"><span>✦</span></div>
+        <div class="current-meta"><strong id="current-title">Wybierz coś dla siebie</strong><span id="current-artist">gotowy na pierwszy beat</span></div>
         <button id="current-like" class="icon-button current-like" type="button" aria-label="Polub utwór"><svg><use href="#i-heart" /></svg></button>
       </div>
 
@@ -121,7 +127,17 @@
           <button class="icon-button" id="next-button" type="button" aria-label="Następny utwór"><svg><use href="#i-next" /></svg></button>
           <button class="icon-button secondary-control" id="repeat-button" type="button" aria-label="Powtarzaj utwór" title="Powtarzaj utwór"><svg><use href="#i-repeat" /></svg></button>
         </div>
-        <div class="progress-row"><span id="elapsed-time">0:00</span><input id="progress" class="progress-slider" type="range" min="0" max="100" value="0" aria-label="Pozycja utworu" /><span id="duration-time">--:--</span></div>
+        <div class="progress-row">
+          <span id="elapsed-time">0:00</span>
+          <div class="progress-control">
+            <div class="progress-track" aria-hidden="true">
+              <span class="progress-track-muted"></span>
+              <span class="progress-track-revealed"></span>
+            </div>
+            <input id="progress" class="progress-slider" type="range" min="0" max="100" value="0" aria-label="Pozycja utworu" />
+          </div>
+          <span id="duration-time">--:--</span>
+        </div>
       </div>
 
       <div class="player-volume"><span class="volume-label">GŁOŚNOŚĆ</span><svg><use href="#i-volume" /></svg><input id="volume" class="volume-slider" type="range" min="0" max="1" step="0.01" value="0.75" aria-label="Głośność" /></div>

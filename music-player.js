@@ -2,14 +2,16 @@ const playlistKey = "petal-fm-mp3-playlist-v1";
 const likedKey = "petal-fm-mp3-liked-v1";
 const hiddenKey = "petal-fm-hidden-library-tracks-v1";
 const databaseName = "petal-fm-audio-v1";
-const fallbackArtwork = "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=160&q=80";
+const fallbackArtwork = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23100914' d='M0 0h64v64H0z'/%3E%3Cpath fill='%23ff35b8' d='M28 8h8v16h12v8H36v24h-8V32H16v-8h12z'/%3E%3Cpath fill='%2300f0ff' d='M8 8h8v8H8zm40 40h8v8h-8z'/%3E%3C/svg%3E";
 const audio = document.querySelector("#audio");
 const trackList = document.querySelector("#track-list");
 const searchInput = document.querySelector("#search-input");
 const progress = document.querySelector("#progress");
 const playButton = document.querySelector("#play-button");
+const themeToggle = document.querySelector("#theme-toggle");
 const toast = document.querySelector("#toast");
 const dialog = document.querySelector("#add-track-dialog");
+const themeKey = "petal-fm-theme-v1";
 const liked = new Set(loadSaved(likedKey));
 const hiddenLibraryTracks = new Set(loadSaved(hiddenKey));
 const libraryTracks = (window.MUSIC_LIBRARY || [])
@@ -148,11 +150,31 @@ function showToast(message) {
   toastTimer = setTimeout(() => toast.classList.remove("visible"), 3000);
 }
 
+function setTheme(isNeon) {
+  document.documentElement.dataset.theme = isNeon ? "neon" : "light";
+  const label = isNeon ? "Włącz jasny motyw" : "Włącz ciemny motyw";
+  themeToggle.setAttribute("aria-label", label);
+  themeToggle.setAttribute("aria-pressed", String(isNeon));
+  themeToggle.title = label;
+  document.querySelector('meta[name="theme-color"]').content = isNeon ? "#100914" : "#fff3fa";
+}
+
+try {
+  setTheme(localStorage.getItem(themeKey) !== "light");
+} catch (error) {
+  console.error("Nie udało się odczytać zapisanego motywu.", error);
+  setTheme(true);
+}
+
 function secondsToTime(value) {
   if (!Number.isFinite(value) || value <= 0) return "--:--";
   const minutes = Math.floor(value / 60);
   const seconds = Math.floor(value % 60).toString().padStart(2, "0");
   return `${minutes}:${seconds}`;
+}
+
+function updateProgressPaint() {
+  progress.parentElement.style.setProperty("--progress", `${progress.value}%`);
 }
 
 function escapeHTML(value) {
@@ -220,6 +242,7 @@ function updateNowPlaying() {
 
 function setPlaying(isPlaying) {
   playButton.classList.toggle("is-playing", isPlaying);
+  document.querySelector(".player").classList.toggle("is-playing", isPlaying);
   playButton.setAttribute("aria-label", isPlaying ? "Wstrzymaj" : "Odtwórz");
   playButton.innerHTML = `<svg><use href="#i-${isPlaying ? "pause" : "play"}" /></svg>`;
   if (currentTrack) renderTracks();
@@ -343,10 +366,11 @@ async function removeTrack(id) {
     currentTrack = null;
     currentIndex = -1;
     progress.value = "0";
+    updateProgressPaint();
     document.querySelector("#elapsed-time").textContent = "0:00";
     document.querySelector("#duration-time").textContent = "--:--";
     document.querySelector("#current-title").textContent = "Wybierz coś dla siebie";
-    document.querySelector("#current-artist").textContent = "ogród czeka na pierwszy utwór";
+    document.querySelector("#current-artist").textContent = "gotowy na pierwszy beat";
     document.querySelector("#current-cover").style.backgroundImage = "";
     setPlaying(false);
   }
@@ -370,6 +394,16 @@ trackList.addEventListener("click", (event) => {
 document.addEventListener("click", (event) => {
   const filter = event.target.closest("[data-filter]");
   if (filter) setFilter(filter.dataset.filter);
+});
+themeToggle.addEventListener("click", () => {
+  const isNeon = document.documentElement.dataset.theme !== "neon";
+  setTheme(isNeon);
+  try {
+    localStorage.setItem(themeKey, isNeon ? "neon" : "light");
+  } catch (error) {
+    console.error("Nie udało się zapisać wybranego motywu.", error);
+    showToast("Nie udało się zapisać ustawień motywu.");
+  }
 });
 searchInput.addEventListener("input", renderTracks);
 document.querySelector("#focus-search").addEventListener("click", () => searchInput.focus());
@@ -407,11 +441,13 @@ document.querySelector("#repeat-button").addEventListener("click", (event) => {
 document.querySelector("#current-like").addEventListener("click", () => { if (currentTrack) toggleLike(currentTrack.id); });
 document.querySelector("#volume").addEventListener("input", (event) => { audio.volume = Number(event.target.value); });
 progress.addEventListener("input", () => {
+  updateProgressPaint();
   if (Number.isFinite(audio.duration)) audio.currentTime = (Number(progress.value) / 100) * audio.duration;
 });
 audio.addEventListener("timeupdate", () => {
   if (!Number.isFinite(audio.duration)) return;
   progress.value = String((audio.currentTime / audio.duration) * 100);
+  updateProgressPaint();
   document.querySelector("#elapsed-time").textContent = secondsToTime(audio.currentTime);
 });
 audio.addEventListener("loadedmetadata", () => {
@@ -431,4 +467,5 @@ document.addEventListener("keydown", (event) => {
 });
 
 audio.volume = Number(document.querySelector("#volume").value);
+updateProgressPaint();
 render();

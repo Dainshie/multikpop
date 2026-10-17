@@ -318,32 +318,78 @@ function setFilter(filter) {
 
 async function addTrack(event) {
   event.preventDefault();
+
+  const form = event.currentTarget;
   const title = document.querySelector("#track-title-input").value.trim();
   const artist = document.querySelector("#track-artist-input").value.trim();
   const file = document.querySelector("#audio-file-input").files[0];
   const artworkFile = document.querySelector("#artwork-file-input").files[0];
+
+  if (!title || !artist) {
+    showToast("Podaj tytuł i wykonawcę.");
+    return;
+  }
+
   if (!file || (!file.type.startsWith("audio/") && !file.name.toLowerCase().endsWith(".mp3"))) {
     showToast("Wybierz plik audio, najlepiej w formacie MP3.");
     return;
   }
 
-  const id = globalThis.crypto?.randomUUID?.() || `mp3-${Date.now()}`;
+  const data = new FormData();
+  data.append("title", title);
+  data.append("artist", artist);
+  data.append("audio", file);
+  if (artworkFile) data.append("artwork", artworkFile);
+
   try {
-    const artworkFileId = artworkFile ? `artwork:${id}` : "";
-    await Promise.all([
-      storeAudioFile(id, file),
-      artworkFile ? storeAudioFile(artworkFileId, artworkFile) : Promise.resolve(),
-    ]);
-    const duration = await readAudioDuration(file);
-    tracks.push({ id, fileId: id, artworkFileId, title, artist, album: artist, artwork: fallbackArtwork, duration });
-    savePlaylist();
+    const response = await fetch("/api/tracks", { method: "POST", body: data });
+    const saved = await response.json();
+    if (!response.ok) throw new Error(saved.error || "Nie udało się zapisać utworu.");
+
+    tracks.push({
+      ...saved,
+      serverId: saved.id,
+      id: `server-${saved.id}`,
+      source: saved.src,
+      album: saved.artist,
+      artwork: saved.artwork || fallbackArtwork
+    });
+
     searchInput.value = "";
-    setFilter("all");
+    activeFilter = "all";
+    onlyLiked = false;
+    document.querySelector("#liked-nav").classList.remove("active");
+    savePlaylist();
+    render();
     dialog.close();
-    event.currentTarget.reset();
-    showToast(`Dodano „${title}” do playlisty.`);
-  } catch {
-    showToast("Nie udało się zapisać pliku. Sprawdź dostępne miejsce w przeglądarce.");
+    form.reset();
+    showToast(`Dodano „${title}” do playlisty i folderu music.`);
+  } catch (error) {
+    showToast(error.message || "Nie udało się połączyć z serwerem. Uruchom server.js.");
+  }
+}
+
+async function loadServerTracks() {
+  try {
+    const response = await fetch("/api/tracks");
+    if (!response.ok) throw new Error("Nie udało się pobrać zapisanych utworów.");
+    const savedTracks = await response.json();
+    const existingIds = new Set(tracks.map(track => track.serverId).filter(Boolean));
+
+    for (const saved of savedTracks) {
+      if (existingIds.has(saved.id)) continue;
+      tracks.push({
+        ...saved,
+        serverId: saved.id,
+        id: `server-${saved.id}`,
+        source: saved.src,
+        album: saved.artist,
+        artwork: saved.artwork || fallbackArtwork
+      });
+    }
+    render();
+  } catch (error) {
+    console.warn("Nie udało się wczytać utworów z serwera. Czy server.js jest uruchomiony?", error);
   }
 }
 
@@ -351,6 +397,15 @@ async function removeTrack(id) {
   const track = tracks.find((item) => item.id === id);
   tracks = tracks.filter((item) => item.id !== id);
   liked.delete(id);
+  if (track?.serverId) {
+    try {
+      const response = await fetch(`/api/tracks/${encodeURIComponent(track.serverId)}`, { method: "DELETE" });
+      if (!response.ok) showToast("Usunięto z listy, ale serwer nie potwierdził usunięcia pliku.");
+    } catch (error) {
+      console.error("Nie udało się usunąć utworu z serwera:", error);
+      showToast("Nie udało się połączyć z serwerem podczas usuwania.");
+    }
+  }
   if (track?.fileId) await deleteAudioFile(track.fileId).catch(() => {});
   if (track?.artworkFileId) await deleteAudioFile(track.artworkFileId).catch(() => {});
   if (artworkUrls.has(id)) URL.revokeObjectURL(artworkUrls.get(id));
@@ -469,3 +524,4 @@ document.addEventListener("keydown", (event) => {
 audio.volume = Number(document.querySelector("#volume").value);
 updateProgressPaint();
 render();
+loadServerTracks();

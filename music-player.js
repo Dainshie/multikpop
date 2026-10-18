@@ -5,14 +5,14 @@ const databaseName = "petal-fm-audio-v1";
 const fallbackArtwork = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23100914' d='M0 0h64v64H0z'/%3E%3Cpath fill='%23ff35b8' d='M28 8h8v16h12v8H36v24h-8V32H16v-8h12z'/%3E%3Cpath fill='%2300f0ff' d='M8 8h8v8H8zm40 40h8v8h-8z'/%3E%3C/svg%3E";
 const chajzerSounds = [
   { title: "Bardzo dobra", text: "„Bardzo dobra!”", source: "chajzer/bardzodobra.mp3" },
-  { title: "Ciekawostka", text: "„Ciekawostka!”", source: "chajzer/ciekawostka.mp3" },
-  { title: "Grill u Gawrona", text: "„Grill u Gawrona!”", source: "chajzer/grillugawrona.mp3" },
-  { title: "Jadłaś pizzę", text: "„Jadłaś pizzę?”", source: "chajzer/jadlaspizze.mp3" },
-  { title: "Kaszelek", text: "„Kaszelek!”", source: "chajzer/kaszelek.mp3" },
-  { title: "Naprawdę", text: "„Naprawdę?”", source: "chajzer/naprawde.mp3" },
-  { title: "Nosowe ą", text: "„Nosowe ą!”", source: "chajzer/nosoweą.mp3" },
-  { title: "Pizza z kebabem", text: "„Pizza z kebabem!”", source: "chajzer/pizzazkebabem.mp3" },
-  { title: "Spróbujemy w Szwecji", text: "„Spróbujemy w Szwecji!”", source: "chajzer/sprobujemywszwecji.mp3" }
+  { title: "Ciekawostka", text: "„Wiesz w ogóle taka ciekawostka...”", source: "chajzer/ciekawostka.mp3" },
+  { title: "Grill u Gawrona", text: "„Ja wiem jakiego! Tylko nie wiem jaki to jest artysta, ja wiem jaka to jest piosenka. Wiem jak świetnie tańczyłaś skarbie do piosenki Grill U Gawrona... Psy to kręcą z drona”", source: "chajzer/grillugawrona.mp3" },
+  { title: "Jadłaś pizzę", text: "„No. Jadłaś kiedyś pizzę z kebabem?”", source: "chajzer/jadlaspizze.mp3" },
+  { title: "Kaszelek", text: "„Khu Khu. O... Kaszelek, kaszelek.”", source: "chajzer/kaszelek.mp3" },
+  { title: "Naprawdę", text: "„Naprawdę? Naprawdę.”", source: "chajzer/naprawde.mp3" },
+  { title: "Nosowe ą", text: "„Mogę ci coś powiedzieć? Możesz. Tylko żeby to nie było że to jest... love co w końcu? Love grooming? Love grooming. Super. Masz świetne nosowe ą”", source: "chajzer/nosoweą.mp3" },
+  { title: "Pizza z kebabem", text: "„Że najchetniej kupowana pizza w Szwecji to pizza z kebabem?”", source: "chajzer/pizzazkebabem.mp3" },
+  { title: "Spróbujemy w Szwecji", text: "„Spróbujemy w Szwecji.”", source: "chajzer/sprobujemywszwecji.mp3" }
 ];
 const audio = document.querySelector("#audio");
 const trackList = document.querySelector("#track-list");

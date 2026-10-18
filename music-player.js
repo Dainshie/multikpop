@@ -18,7 +18,20 @@ const chajzerSounds = [
   { title: "Dźwięki na zjeżdżalni", text: "„Naprawdę? Naprawdę.”", source: "chajzer/OOOOOO.mp3" },
   { title: "Ślizg", text: "„rooming? Love grooming. Super. Masz świetne nosowe ą”", source: "chajzer/SLIZG.mp3" },
   { title: "Styrta", text: "„Że najchetniej kupowana pizza w Szwecji to pizza z kebabem?”", source: "chajzer/STYRTA.mp3" },
-  { title: "Było już", text: "„Spróbujemy w Szwecji.”", source: "chajzer/BYLO.mp3" }
+  { title: "Było już", text: "„Spróbujemy w Szwecji.”", source: "chajzer/BYLO.mp3" },
+
+
+  { title: "Ale urwał", text: "„Jest bardzo dobra!”", source: "chajzer/aleurwal.mp3" },
+  { title: "Andrzeju", text: "„Wiesz w ogóle taka ciekawostka...”", source: "chajzer/andrzeju.mp3" },
+  { title: "Tłukło", text: "„ jak świetnie tańczyłaś ”", source: "chajzer/calyczas.mp3" },
+  { title: "Piotr Żyła", text: "„No. Jadłaś kiedyś pizzę z kebabem?”", source: "chajzer/corka.mp3" },
+  { title: "Co to", text: "„Khu Khu. O... Kaszelek, kaszelek.”", source: "chajzer/coto.mp3" },
+  { title: "Kierunkowskaz", text: "„Naprawdę? Naprawdę.”", source: "chajzer/kierunkowskaz.mp3" },
+  { title: "MATKO JEDYNA", text: "„końcu? Love grooming? Love grooming.”", source: "chajzer/matkojedyna.mp3" },
+  { title: "Pasztet", text: "„Że najchetniej ku”", source: "chajzer/PASZTET.mp3" },
+  { title: "Babciu", text: "„Spróbujemy w Szwecji.”", source: "chajzer/TOJEST.mp3" },
+  { title: "Weź się tato!", text: "„No. Jadłaś kiedyś pizzę z kebabem?”", source: "chajzer/wezsietato.mp3" },
+  { title: "Zawracanie", text: "„Khu Khu. O... Kaszelek, kaszelek.”", source: "chajzer/zawracanie.mp3" }
 ];
 const audio = document.querySelector("#audio");
 const trackList = document.querySelector("#track-list");

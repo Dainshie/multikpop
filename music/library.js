@@ -6,4 +6,6 @@ window.MUSIC_LIBRARY = [
   { title: "S3N!", artist: "Young Multi", src: "music/s3n_youngmulti.mp3", artwork: "music/s_ym.png" },
   { title: "KIELICH", artist: "Young Multi", src: "music/KIELICH.mp3", artwork: "music/k_ym.jpg" },
   { title: "Błysk flesza", artist: "Young Multi", src: "music/blyskflesza_youngmulti.mp3", artwork: "music/bf_ym.png" },
+  { title: "Młody Manson", artist: "Young Multi", src: "music/mlodymanson_youngmulti.mp3", artwork: "music/mm_ym.jpg" },
+  { title: "AK47", artist: "Young Multi", src: "music/ak47_youngmulti.mp3", artwork: "music/a_ym.png" },
 ];

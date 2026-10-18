@@ -79,13 +79,16 @@
 
         <section class="hero" aria-labelledby="hero-title">
           <div class="hero-copy">
-            <p class="eyebrow"><span class="eyebrow-flower">///</span> SIGNAL 01 <span class="eyebrow-line"></span></p>
-            <h1 id="hero-title">TRYB<br /><em>HYPERPOP</em></h1>
-            <p class="hero-description">Neonowe bity, ciężki bas i zero ciszy. Young Multi, J.Y. Park i ty.</p>
+            <p class="eyebrow"><span class="eyebrow-flower">///</span> <span id="hero-eyebrow-label">MIX DNIA</span> <span class="eyebrow-line"></span></p>
+            <h1 id="hero-title">SKŁADANKA<br /><em>NA DZIŚ</em></h1>
+            <p class="hero-description" id="hero-description">Miks, który pasuje do dzisiejszego nastroju. Wybierz play i daj się ponieść.</p>
             <button class="primary-button" id="hero-play"><svg><use href="#i-play" /></svg><span>Odtwórz miks</span></button>
           </div>
-          <div class="hero-art" aria-label="Pikselowa grafika cyberpunkowa">
-            <div class="hero-art-image"></div>
+          <div class="hero-featured-showcase" aria-label="Polecane utwory">
+            <div class="hero-featured-tracks" id="hero-featured-tracks" aria-label="Losowo wybrane utwory"></div>
+          </div>
+          <div class="hero-art" aria-label="Retro miasto o zachodzie słońca">
+            <div class="hero-art-image" role="img" aria-label="Neonowa droga przez miasto o zachodzie słońca"></div>
             <span class="hero-sticker sticker-top">NO SLEEP<br />JUST BEATS</span>
             <span class="hero-sticker sticker-bottom"><span class="pixel-flower" aria-hidden="true"></span></span>
             <span class="hero-caption">SIGNAL: ONLINE</span>
@@ -126,6 +129,14 @@
         <button id="current-like" class="icon-button current-like" type="button" aria-label="Polub utwór"><svg><use href="#i-heart" /></svg></button>
       </div>
 
+      <button class="queue-preview queue-preview-prev" id="previous-track-preview" type="button" data-preview-direction="-1" aria-label="Odtwórz poprzedni utwór" disabled>
+        <span class="queue-preview-label">POPRZEDNI</span>
+        <span class="queue-preview-content">
+          <img class="queue-preview-cover" alt="" />
+          <span class="queue-preview-meta"><strong class="queue-preview-title">Brak poprzedniego</strong><span class="queue-preview-artist">—</span></span>
+        </span>
+      </button>
+
       <div class="player-center">
         <div class="player-controls">
           <button class="icon-button secondary-control" id="shuffle-button" type="button" aria-label="Losuj utwory" title="Losuj utwory"><svg><use href="#i-shuffle" /></svg></button>
@@ -146,6 +157,14 @@
           <span id="duration-time">--:--</span>
         </div>
       </div>
+
+      <button class="queue-preview queue-preview-next" id="next-track-preview" type="button" data-preview-direction="1" aria-label="Odtwórz następny utwór" disabled>
+        <span class="queue-preview-label">NASTĘPNY</span>
+        <span class="queue-preview-content">
+          <img class="queue-preview-cover" alt="" />
+          <span class="queue-preview-meta"><strong class="queue-preview-title">Wybierz miks</strong><span class="queue-preview-artist">—</span></span>
+        </span>
+      </button>
 
       <div class="player-volume"><span class="volume-label">GŁOŚNOŚĆ</span><svg><use href="#i-volume" /></svg><input id="volume" class="volume-slider" type="range" min="0" max="1" step="0.01" value="0.75" aria-label="Głośność" /></div>
     </section>

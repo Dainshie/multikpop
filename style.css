@@ -987,3 +987,429 @@ html[data-theme="light"] .hero-art-image::after {
     width: min(300px, calc(100vw - 24px));
   }
 }
+
+
+/* Hero showcase: three large, clickable album covers with titles underneath */
+.hero {
+  grid-template-columns: minmax(0, 1fr) minmax(350px, 410px) !important;
+}
+.hero-art.hero-featured-panel {
+  width: min(410px, 100%) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  display: block !important;
+  justify-self: end !important;
+  align-self: center !important;
+  padding: 15px 12px 17px !important;
+  margin: 0 !important;
+  transform: none !important;
+  overflow: visible !important;
+  border: 2px solid #a83998 !important;
+  border-radius: 0 !important;
+  background:
+    linear-gradient(45deg, rgb(255 53 184 / 8%) 25%, transparent 25%, transparent 75%, rgb(255 53 184 / 8%) 75%),
+    linear-gradient(45deg, rgb(255 53 184 / 8%) 25%, transparent 25%, transparent 75%, rgb(255 53 184 / 8%) 75%),
+    #170d20 !important;
+  background-size: 18px 18px !important;
+  background-position: 0 0, 9px 9px !important;
+  box-shadow: 5px 5px 0 #3c1740 !important;
+}
+.hero-featured-tracks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+}
+.hero-featured-track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 7px;
+  border: 1px solid #54234c;
+  border-radius: 0;
+  background: #1d1022;
+  color: #f7e6fa;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .16s ease, transform .16s ease, background .16s ease;
+}
+.hero-featured-track:hover,
+.hero-featured-track:focus-visible {
+  z-index: 2;
+  border-color: #ff35b8;
+  outline: none;
+  background: #29132e;
+  transform: translateY(-3px);
+  box-shadow: 0 0 0 1px rgb(255 53 184 / 25%), 0 0 18px rgb(255 53 184 / 12%);
+}
+.hero-featured-cover {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid #ff35b8;
+  background: #100914;
+}
+.hero-featured-title {
+  display: -webkit-box;
+  min-height: 2.5em;
+  margin-top: 9px;
+  overflow: hidden;
+  color: #fff3ff;
+  font-family: var(--serif);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.hero-featured-artist {
+  display: block;
+  margin-top: 4px;
+  overflow: hidden;
+  color: #d7a3dc;
+  font-size: 9px;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hero-featured-play {
+  position: absolute;
+  top: 76px;
+  right: 13px;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid #ff35b8;
+  background: #ff00a8;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .16s ease, transform .16s ease;
+}
+.hero-featured-track:hover .hero-featured-play,
+.hero-featured-track:focus-visible .hero-featured-play {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hero-featured-empty {
+  grid-column: 1 / -1;
+  margin: 12px;
+  color: #d7a3dc;
+  font-size: 11px;
+}
+.hero-featured-panel .sticker-top {
+  z-index: 4;
+  top: -15px;
+  right: -18px;
+}
+.hero-featured-panel .sticker-bottom {
+  z-index: 4;
+  bottom: 18px;
+  left: -22px;
+}
+.hero-featured-panel .hero-caption {
+  z-index: 4;
+  bottom: -22px;
+  color: #f08be0;
+  font-family: var(--serif);
+  font-style: normal;
+}
+
+@media (max-width: 1050px) and (min-width: 761px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 350px) !important;
+  }
+  .hero-art.hero-featured-panel {
+    width: min(350px, 100%) !important;
+    padding: 12px 9px 14px !important;
+  }
+  .hero-featured-tracks { gap: 7px; }
+  .hero-featured-track { padding: 5px; }
+  .hero-featured-title { font-size: 9px; }
+}
+@media (max-width: 760px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 24px !important;
+    min-height: 0 !important;
+  }
+  .hero-art.hero-featured-panel {
+    justify-self: center !important;
+    width: min(100%, 420px) !important;
+    margin-top: 3px !important;
+    padding: 12px 10px 14px !important;
+  }
+  .hero-featured-tracks { gap: 7px; }
+  .hero-featured-track { padding: 5px; }
+  .hero-featured-title { font-size: 9px; }
+  .hero-featured-artist { font-size: 8px; }
+  .hero-featured-play { top: 60px; right: 10px; width: 25px; height: 25px; }
+  .hero-featured-panel .sticker-bottom { bottom: 18px; left: -8px; }
+  .hero-featured-panel .sticker-top { right: -7px; }
+}
+
+
+/* Corrected hero layout: keep the retro car artwork on the right and show featured tracks in the open space to its left */
+@media (min-width: 761px) {
+  .hero {
+    grid-template-columns: minmax(230px, .82fr) minmax(390px, 1.28fr) minmax(220px, 260px) !important;
+    column-gap: 22px !important;
+    align-items: center !important;
+  }
+  .hero-copy {
+    grid-column: 1;
+    min-width: 0;
+  }
+  .hero-featured-showcase {
+    grid-column: 2;
+    position: relative;
+    z-index: 2;
+    min-width: 0;
+    width: 100%;
+    align-self: center;
+  }
+  .hero-featured-tracks {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+    gap: 12px;
+    width: 100%;
+  }
+  .hero-featured-track {
+    min-width: 0;
+    padding: 7px;
+    border: 1px solid #54234c;
+    background: rgb(20 9 25 / 82%);
+    color: #f7e6fa;
+  }
+  .hero-featured-cover {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+  .hero-featured-title {
+    margin-top: 9px;
+    min-height: 2.5em;
+    font-size: 10px;
+  }
+  .hero-featured-artist {
+    font-size: 9px;
+  }
+  .hero-art {
+    grid-column: 3;
+    justify-self: end !important;
+    width: min(100%, 250px) !important;
+    height: 243px !important;
+    transform: none !important;
+  }
+}
+@media (min-width: 1440px) {
+  .hero {
+    grid-template-columns: minmax(250px, .8fr) minmax(460px, 1.3fr) minmax(230px, 260px) !important;
+    column-gap: 26px !important;
+  }
+  .hero-art {
+    width: 260px !important;
+    height: 250px !important;
+  }
+  .hero-featured-tracks { gap: 14px; }
+  .hero-featured-track { padding: 8px; }
+  .hero-featured-title { font-size: 11px; }
+  .hero-featured-artist { font-size: 10px; }
+}
+@media (max-width: 1050px) and (min-width: 761px) {
+  .hero {
+    grid-template-columns: minmax(190px, .8fr) minmax(300px, 1.2fr) minmax(170px, 205px) !important;
+    column-gap: 12px !important;
+    padding-right: 24px !important;
+    padding-left: 24px !important;
+  }
+  .hero-art {
+    width: 190px !important;
+    height: 210px !important;
+  }
+  .hero-featured-tracks { gap: 7px; }
+  .hero-featured-track { padding: 5px; }
+  .hero-featured-title { font-size: 9px; }
+  .hero-featured-artist { font-size: 8px; }
+}
+@media (max-width: 760px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 22px !important;
+  }
+  .hero-copy,
+  .hero-featured-showcase,
+  .hero-art {
+    grid-column: 1;
+  }
+  .hero-featured-showcase {
+    width: 100%;
+  }
+  .hero-featured-tracks { gap: 7px; }
+  .hero-featured-track { padding: 5px; }
+  .hero-featured-title { font-size: 9px; }
+  .hero-featured-artist { font-size: 8px; }
+  .hero-art {
+    justify-self: center !important;
+    width: min(100%, 260px) !important;
+    height: 240px !important;
+    margin-top: 0 !important;
+  }
+}
+
+/* Close the vertical gap between the right-hand menu and the fixed bottom player */
+@media (min-width: 761px) {
+  .app-shell {
+    min-height: calc(100vh - 78px) !important;
+  }
+  .sidebar {
+    height: calc(100vh - 78px) !important;
+  }
+}
+
+
+/* Previous/next track previews flanking the bottom player controls */
+@media (min-width: 1101px) {
+  .player {
+    grid-template-columns: minmax(165px, .95fr) minmax(130px, .7fr) minmax(280px, 1.45fr) minmax(130px, .7fr) minmax(135px, .75fr) !important;
+    gap: 14px !important;
+    padding-left: max(20px, calc((100vw - 1600px) / 2));
+    padding-right: max(20px, calc((100vw - 1600px) / 2));
+  }
+  .queue-preview {
+    display: grid;
+    min-width: 0;
+    gap: 5px;
+    padding: 0;
+    border: 1px solid transparent;
+    background: transparent;
+    color: #fceafa;
+    text-align: left;
+    cursor: pointer;
+  }
+  .queue-preview:disabled { cursor: default; opacity: .42; }
+  .queue-preview:not(:disabled):hover { border-color: #7f287c; background: rgb(255 53 184 / 6%); }
+  .queue-preview-label { color: #a75aa1; font-size: 7px; font-weight: 800; letter-spacing: 1.2px; }
+  .queue-preview-content { display: flex; min-width: 0; align-items: center; gap: 7px; }
+  .queue-preview-cover { width: 34px; height: 34px; flex: 0 0 34px; border: 1px solid #a83998; object-fit: cover; background: #100914; }
+  .queue-preview-cover[hidden] { display: none; }
+  .queue-preview-meta { display: grid; min-width: 0; gap: 3px; }
+  .queue-preview-title, .queue-preview-artist { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .queue-preview-title { color: #fceafa; font-size: 9px; font-weight: 700; }
+  .queue-preview-artist { color: #c5a7c5; font-size: 8px; }
+  .queue-preview-prev { grid-column: 2; }
+  .player-center { grid-column: 3; min-width: 0; }
+  .queue-preview-next { grid-column: 4; }
+  .player-volume { grid-column: 5; min-width: 0; }
+}
+@media (min-width: 761px) and (max-width: 1100px) {
+  .queue-preview { display: none !important; }
+  .player { grid-template-columns: minmax(170px, 1fr) minmax(250px, 1.3fr) minmax(130px, 1fr) !important; }
+}
+@media (max-width: 760px) {
+  .queue-preview { display: none !important; }
+}
+
+
+/* MultiKpop: jeszcze większe tytuły polecanych utworów */
+@media (min-width: 1101px) {
+  .hero-featured-title {
+    font-size: 16px !important;
+    line-height: 1.3 !important;
+    font-weight: 800 !important;
+    min-height: 2.6em;
+    margin-top: 11px !important;
+    letter-spacing: .2px;
+  }
+  .hero-featured-artist {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+  }
+}
+@media (min-width: 761px) and (max-width: 1100px) {
+  .hero-featured-title {
+    font-size: 13px !important;
+    line-height: 1.3 !important;
+    font-weight: 800 !important;
+  }
+  .hero-featured-artist {
+    font-size: 10px !important;
+  }
+}
+
+
+/* MultiKpop: put previous/next previews at the far edges of the bottom player */
+@media (min-width: 1101px) {
+  .player {
+    grid-template-columns:
+      minmax(190px, 1fr)
+      minmax(170px, .85fr)
+      minmax(320px, 1.5fr)
+      minmax(145px, .7fr)
+      minmax(190px, 1fr) !important;
+    gap: 18px !important;
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+  }
+
+  /* DOM order: current track, previous preview, controls, next preview, volume.
+     Place the previews at the outer edges, away from the playback buttons. */
+  .queue-preview-prev {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: start;
+    width: 100%;
+    max-width: 230px;
+  }
+  .now-playing {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+  }
+  .player-center {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    min-width: 0;
+  }
+  .player-volume {
+    grid-column: 4 !important;
+    grid-row: 1 !important;
+    min-width: 0;
+  }
+  .queue-preview-next {
+    grid-column: 5 !important;
+    grid-row: 1 !important;
+    justify-self: end;
+    width: 100%;
+    max-width: 230px;
+  }
+}
+
+/* Move the three featured track cards further left, leaving more breathing room before the car */
+@media (min-width: 1440px) {
+  .hero-featured-showcase {
+    transform: translateX(-78px) !important;
+    width: calc(100% + 42px) !important;
+  }
+  .hero-featured-tracks {
+    gap: 16px !important;
+  }
+}
+@media (min-width: 1101px) and (max-width: 1439px) {
+  .hero-featured-showcase {
+    transform: translateX(-48px) !important;
+    width: calc(100% + 24px) !important;
+  }
+}
+@media (max-width: 1100px) {
+  .hero-featured-showcase {
+    transform: none !important;
+    width: 100% !important;
+  }
+}

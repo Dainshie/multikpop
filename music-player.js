@@ -43,6 +43,10 @@ let onlyLiked = false;
 let shuffle = false;
 let repeatMode = "off"; // off | all | one
 let queueTrackIds = [];
+let heroFeaturedIds = [];
+let playHistory = [];
+let suppressHistoryOnce = false;
+let plannedShuffleNextId = null;
 let toastTimer;
 let activeObjectUrl = "";
 let playRequest = 0;
@@ -155,6 +159,7 @@ function getTrackArtwork(track) {
       if (image) {
         if (currentTrack?.id === track.id) document.querySelector("#current-cover").style.backgroundImage = `url('${artworkUrls.get(track.id)}')`;
         renderTracks();
+        renderHeroTracks();
       }
     }).catch(() => artworkRequests.delete(track.id));
   }
@@ -511,10 +516,170 @@ function renderTracks() {
   document.querySelector("#track-count").textContent = `${visibleTracks.length} ${visibleTracks.length === 1 ? "utwór" : "utworów"}`;
 }
 
+
+const heroMoods = [
+  { eyebrow: "MIX DNIA", first: "SKŁADANKA", second: "NA DZIŚ", description: "Miks na dzisiejszy nastrój. Wciśnij play i daj się ponieść." },
+  { eyebrow: "POWRÓT W CZASIE", first: "UTWORY", second: "Z PRZESZŁOŚCI", description: "Numery, które mają swoje wspomnienia i wciąż robią klimat." },
+  { eyebrow: "NEONOWE WSPOMNIENIA", first: "NEONOWE", second: "WSPOMNIENIA", description: "Znane refreny, mocny bas i odrobina nostalgii." },
+  { eyebrow: "NOCNY SYGNAŁ", first: "NOCNA", second: "JAZDA", description: "Miasto za oknem, słuchawki na uszach i bit, który prowadzi dalej." },
+  { eyebrow: "NA TWOIM LOOPIE", first: "DOBRE", second: "POWTÓRKI", description: "Kawałki, do których zawsze chce się wracać." },
+  { eyebrow: "BEZ PLANU", first: "LOSOWY", second: "VIBE", description: "Trochę rapu, trochę nostalgii i żadnego przewidywania." },
+  { eyebrow: "ARCHIWUM BITÓW", first: "STARE", second: "ULUBIONE", description: "Odkopujemy utwory, które zasługują na jeszcze jedno odtworzenie." }
+];
+
+function setRandomHeroMood() {
+  const mood = heroMoods[Math.floor(Math.random() * heroMoods.length)];
+  const title = document.querySelector("#hero-title");
+  const description = document.querySelector("#hero-description");
+  const eyebrow = document.querySelector("#hero-eyebrow-label");
+  if (title) title.innerHTML = `${escapeHTML(mood.first)}<br /><em>${escapeHTML(mood.second)}</em>`;
+  if (description) description.textContent = mood.description;
+  if (eyebrow) eyebrow.textContent = mood.eyebrow;
+}
+
+function renderHeroTracks(forceShuffle = false) {
+  const container = document.querySelector("#hero-featured-tracks");
+  if (!container) return;
+
+  const available = tracks.filter((track) => track?.title && track?.artist);
+  if (!available.length) {
+    container.innerHTML = `<p class="hero-featured-empty">Dodaj utwory, żeby zobaczyć je tutaj.</p>`;
+    return;
+  }
+
+  const availableIds = new Set(available.map((track) => track.id));
+  heroFeaturedIds = heroFeaturedIds.filter((id) => availableIds.has(id));
+
+  if (forceShuffle || !heroFeaturedIds.length) {
+    const shuffled = [...available].sort(() => Math.random() - 0.5);
+    heroFeaturedIds = shuffled.slice(0, Math.min(3, shuffled.length)).map((track) => track.id);
+  } else if (heroFeaturedIds.length < Math.min(3, available.length)) {
+    const extras = available
+      .filter((track) => !heroFeaturedIds.includes(track.id))
+      .sort(() => Math.random() - 0.5);
+    heroFeaturedIds.push(...extras.slice(0, Math.min(3, available.length) - heroFeaturedIds.length).map((track) => track.id));
+  }
+
+  const featured = heroFeaturedIds
+    .map((id) => available.find((track) => track.id === id))
+    .filter(Boolean)
+    .slice(0, 3);
+
+  container.innerHTML = featured.map((track) => `
+    <button type="button" class="hero-featured-track" data-hero-track="${escapeHTML(track.id)}" aria-label="Odtwórz ${escapeHTML(track.title)} — ${escapeHTML(track.artist)}">
+      <img class="hero-featured-cover" src="${escapeHTML(getTrackArtwork(track))}" alt="" loading="lazy" />
+      <span class="hero-featured-title">${escapeHTML(track.title)}</span>
+      <span class="hero-featured-artist">${escapeHTML(track.artist)}</span>
+      <span class="hero-featured-play" aria-hidden="true">▶</span>
+    </button>
+  `).join("");
+  renderQueuePreviews();
+}
+
+function getValidQueueTracks() {
+  return queueTrackIds
+    .map((id) => tracks.find((track) => track.id === id))
+    .filter(Boolean);
+}
+
+function getPreviewTrack(direction) {
+  let queue = getValidQueueTracks();
+  if (!queue.length) {
+    queue = heroFeaturedIds.map((id) => tracks.find((track) => track.id === id)).filter(Boolean);
+  }
+  if (!queue.length) return null;
+  if (!currentTrack) return direction > 0 ? queue[0] : null;
+
+  const index = queue.findIndex((track) => track.id === currentTrack.id);
+  if (index < 0) return direction > 0 ? queue[0] : null;
+
+  if (shuffle && direction < 0 && playHistory.length) {
+    return tracks.find((track) => track.id === playHistory[playHistory.length - 1]) || null;
+  }
+  if (shuffle && direction > 0 && queue.length > 1) {
+    if (!plannedShuffleNextId || plannedShuffleNextId === currentTrack.id ||
+        !queue.some((track) => track.id === plannedShuffleNextId)) {
+      const choices = queue.filter((track) => track.id !== currentTrack.id);
+      plannedShuffleNextId = choices[Math.floor(Math.random() * choices.length)]?.id || null;
+    }
+    return queue.find((track) => track.id === plannedShuffleNextId) || null;
+  }
+
+  if (direction > 0 && repeatMode === "one") return currentTrack;
+  let targetIndex = index + direction;
+  if (targetIndex < 0 || targetIndex >= queue.length) {
+    if (repeatMode === "all" && queue.length > 1) targetIndex = targetIndex < 0 ? queue.length - 1 : 0;
+    else return null;
+  }
+  return queue[targetIndex] || null;
+}
+
+function renderQueuePreviews() {
+  [
+    { id: "previous-track-preview", direction: -1 },
+    { id: "next-track-preview", direction: 1 }
+  ].forEach(({ id, direction }) => {
+    const button = document.getElementById(id);
+    if (!button) return;
+    const track = getPreviewTrack(direction);
+    const cover = button.querySelector(".queue-preview-cover");
+    const title = button.querySelector(".queue-preview-title");
+    const artist = button.querySelector(".queue-preview-artist");
+    button.disabled = !track;
+    button.classList.toggle("has-track", Boolean(track));
+    if (track) {
+      cover.src = getTrackArtwork(track);
+      cover.hidden = false;
+      title.textContent = track.title;
+      artist.textContent = track.artist;
+      button.setAttribute("aria-label", `${direction < 0 ? "Odtwórz poprzedni" : "Odtwórz następny"} utwór: ${track.title} — ${track.artist}`);
+    } else {
+      cover.removeAttribute("src");
+      cover.hidden = true;
+      title.textContent = direction < 0 ? "Brak poprzedniego" : "Koniec miksu";
+      artist.textContent = "—";
+      button.setAttribute("aria-label", direction < 0 ? "Brak poprzedniego utworu" : "Brak następnego utworu");
+    }
+  });
+}
+
+function playHeroMix() {
+  // Najpierw odtwarzamy dokładnie trzy widoczne polecane utwory,
+  // a potem dokładamy pozostałe utwory kolekcji w losowej kolejności.
+  const featuredIds = [...new Set(heroFeaturedIds)]
+    .filter((id) => tracks.some((track) => track.id === id))
+    .slice(0, 3);
+
+  const remainingTracks = tracks.filter((track) =>
+    track?.id && track.title && track.artist && !featuredIds.includes(track.id)
+  );
+
+  // Fisher–Yates: losujemy kolejność pozostałych utworów bez powtórzeń.
+  for (let i = remainingTracks.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [remainingTracks[i], remainingTracks[j]] = [remainingTracks[j], remainingTracks[i]];
+  }
+
+  const queueIds = [
+    ...featuredIds,
+    ...remainingTracks.map((track) => track.id)
+  ];
+  const firstTrack = tracks.find((track) => track.id === queueIds[0]);
+
+  if (!firstTrack) {
+    showToast("Nie ma jeszcze utworów do miksu.");
+    return;
+  }
+
+  playTrack(firstTrack, queueIds);
+  showToast(`Miks: ${featuredIds.length} polecane utwory, potem losowa reszta kolekcji.`);
+}
+
 function render() {
   renderFilters();
   renderPlaylistMenu();
   renderTracks();
+  renderHeroTracks();
 }
 
 function updateNowPlaying() {
@@ -525,6 +690,7 @@ function updateNowPlaying() {
   document.querySelector("#current-like").classList.toggle("liked", liked.has(currentTrack.id));
   document.querySelector("#duration-time").textContent = secondsToTime(currentTrack.duration);
   renderTracks();
+  renderQueuePreviews();
 }
 
 function setPlaying(isPlaying) {
@@ -581,6 +747,12 @@ async function playTrack(track, queueIds = null) {
   }
   if (!queueTrackIds.includes(track.id)) queueTrackIds.unshift(track.id);
 
+  if (currentTrack && currentTrack.id !== track.id && !suppressHistoryOnce) {
+    playHistory.push(currentTrack.id);
+    if (playHistory.length > 100) playHistory.shift();
+  }
+  suppressHistoryOnce = false;
+  plannedShuffleNextId = null;
   currentTrack = track;
   currentIndex = queueTrackIds.indexOf(track.id);
   const requestId = ++playRequest;
@@ -610,20 +782,32 @@ async function playTrack(track, queueIds = null) {
 }
 
 function playNext(direction = 1) {
-  const validQueue = queueTrackIds
-    .map((id) => tracks.find((track) => track.id === id))
-    .filter(Boolean);
-
+  const validQueue = getValidQueueTracks();
   if (!validQueue.length) {
     if (!tracks.length) showToast("Dodaj najpierw utwór do kolekcji.");
     return;
   }
 
+  if (direction < 0 && shuffle && playHistory.length) {
+    const previousId = playHistory.pop();
+    const previousTrack = tracks.find((track) => track.id === previousId);
+    if (previousTrack) {
+      suppressHistoryOnce = true;
+      playTrack(previousTrack, queueTrackIds);
+      return;
+    }
+  }
+
   const index = validQueue.findIndex((track) => track.id === currentTrack?.id);
   let nextIndex;
-
   if (shuffle && validQueue.length > 1 && direction > 0) {
-    do { nextIndex = Math.floor(Math.random() * validQueue.length); } while (nextIndex === index);
+    const planned = validQueue.find((track) => track.id === plannedShuffleNextId && track.id !== currentTrack?.id);
+    if (planned) {
+      nextIndex = validQueue.findIndex((track) => track.id === planned.id);
+    } else {
+      const choices = validQueue.map((track, i) => ({ track, i })).filter(({ track }) => track.id !== currentTrack?.id);
+      nextIndex = choices[Math.floor(Math.random() * choices.length)].i;
+    }
   } else {
     nextIndex = index + direction;
     if (nextIndex < 0) {
@@ -633,6 +817,7 @@ function playNext(direction = 1) {
           audio.currentTime = 0;
           if (audio.paused) audio.play().catch(() => {});
         }
+        renderQueuePreviews();
         return;
       }
     }
@@ -642,14 +827,13 @@ function playNext(direction = 1) {
         audio.pause();
         audio.currentTime = 0;
         setPlaying(false);
+        renderQueuePreviews();
         return;
       }
     }
   }
-
-  playTrack(validQueue[nextIndex], queueTrackIds);
+  if (nextIndex >= 0 && nextIndex < validQueue.length) playTrack(validQueue[nextIndex], queueTrackIds);
 }
-
 function updateRepeatButton() {
   const button = document.querySelector("#repeat-button");
   if (!button) return;
@@ -754,6 +938,7 @@ async function addTrack(event) {
     document.querySelector("#liked-nav").classList.remove("active");
     savePlaylist();
     render();
+    renderHeroTracks(true);
     dialog.close();
     form.reset();
     showToast(`Dodano „${title}” do playlisty i folderu music.`);
@@ -781,6 +966,7 @@ async function loadServerTracks() {
       });
     }
     render();
+    renderHeroTracks(true);
   } catch (error) {
     console.warn("Nie udało się wczytać utworów z serwera. Czy server.js jest uruchomiony?", error);
   }
@@ -938,11 +1124,40 @@ pepeAudio.addEventListener("error", () => {
   }
 });
 document.querySelector("#pepe-bubble-close").addEventListener("click", hidePepeBubble);
+document.querySelector("#hero-featured-tracks")?.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-hero-track]");
+  if (!button) return;
+  const track = tracks.find((item) => item.id === button.dataset.heroTrack);
+  const mixIds = heroFeaturedIds.filter((id) => tracks.some((item) => item.id === id));
+  if (track) playTrack(track, mixIds);
+});
+
+document.querySelectorAll("[data-preview-direction]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const direction = Number(button.dataset.previewDirection);
+    const previewTrack = getPreviewTrack(direction);
+    if (!previewTrack) return;
+    if (direction < 0 && shuffle && playHistory.length) {
+      playNext(-1);
+    } else if (previewTrack.id !== currentTrack?.id) {
+      const ids = queueTrackIds.length ? queueTrackIds : heroFeaturedIds;
+      playTrack(previewTrack, ids);
+    } else if (direction < 0) {
+      audio.currentTime = 0;
+      if (audio.paused) audio.play().catch(() => {});
+    }
+  });
+});
+
 document.querySelector("#hero-play").addEventListener("click", () => {
-  const selected = activePlaylist();
-  if (selected) playPlaylist(selected.id);
-  else if (tracks.length) playTrack(tracks[0], tracks.map((track) => track.id));
-  else dialog.showModal();
+  if (heroFeaturedIds.some((id) => tracks.some((track) => track.id === id))) {
+    playHeroMix();
+  } else if (tracks.length) {
+    renderHeroTracks(true);
+    playHeroMix();
+  } else {
+    dialog.showModal();
+  }
 });
 document.querySelector("#add-track-button").addEventListener("click", () => dialog.showModal());
 document.querySelector("#close-dialog").addEventListener("click", () => dialog.close());
@@ -957,12 +1172,15 @@ document.querySelector("#previous-button").addEventListener("click", () => {
 document.querySelector("#shuffle-button").addEventListener("click", (event) => {
   shuffle = !shuffle;
   event.currentTarget.classList.toggle("active", shuffle);
+  plannedShuffleNextId = null;
+  renderQueuePreviews();
   showToast(shuffle ? "Losowanie włączone." : "Losowanie wyłączone.");
 });
 document.querySelector("#repeat-button").addEventListener("click", () => {
   repeatMode = repeatMode === "off" ? "all" : repeatMode === "all" ? "one" : "off";
   audio.loop = repeatMode === "one";
   updateRepeatButton();
+  renderQueuePreviews();
   const messages = {
     off: "Powtarzanie wyłączone.",
     all: "Powtarzanie całej playlisty włączone.",
@@ -1005,5 +1223,7 @@ updateMusicVolume();
 updateProgressPaint();
 installPlaylistUI();
 updateRepeatButton();
+setRandomHeroMood();
 render();
+renderQueuePreviews();
 loadServerTracks();

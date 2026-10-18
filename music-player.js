@@ -1086,6 +1086,12 @@ function showPepeBubble(sound) {
   pepeBubble.hidden = false;
   pepeBubble.classList.remove("is-closing");
 
+  // Force the bubble to size itself to the current text, preventing leftover height.
+  pepeBubble.style.setProperty("height", "fit-content", "important");
+  pepeBubble.style.setProperty("min-height", "0", "important");
+  pepeBubble.style.setProperty("max-height", "none", "important");
+  pepeBubble.style.setProperty("padding-bottom", "8px", "important");
+
   // Keep the speech bubble beside Pepe and vertically centered on the image.
   const placePepeBubble = () => {
     const button = document.querySelector("#pepe-sound");

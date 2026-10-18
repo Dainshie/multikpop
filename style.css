@@ -1743,3 +1743,31 @@ html[data-theme="light"] #repeat-button.active svg use {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
+
+
+/* Compact speech bubble: remove the fixed-looking empty area under the status line */
+#pepe-bubble:not([hidden]) {
+  display: block !important;
+  height: fit-content !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  padding: 10px 18px 8px !important;
+  overflow: visible !important;
+}
+#pepe-bubble .pepe-bubble-kicker {
+  margin-bottom: 6px !important;
+}
+#pepe-bubble .pepe-bubble-title {
+  margin-bottom: 5px !important;
+  line-height: 1.2 !important;
+}
+#pepe-bubble .pepe-bubble-text {
+  margin-bottom: 5px !important;
+  line-height: 1.35 !important;
+}
+#pepe-bubble .pepe-bubble-status {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.15 !important;
+}

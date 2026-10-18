@@ -1413,3 +1413,56 @@ html[data-theme="light"] .hero-art-image::after {
     width: 100% !important;
   }
 }
+
+
+/* MultiKpop: coherent pastel styling for song cards and Pepe speech bubble in LIGHT mode */
+html[data-theme="light"] .hero-featured-track {
+  border-color: #eea6df !important;
+  background: linear-gradient(160deg, #fffaff 0%, #fcefff 100%) !important;
+  color: #30213e !important;
+  box-shadow: 0 3px 10px rgb(190 111 181 / 10%);
+}
+html[data-theme="light"] .hero-featured-track:hover,
+html[data-theme="light"] .hero-featured-track:focus-visible {
+  border-color: #f04bc4 !important;
+  background: linear-gradient(160deg, #fff 0%, #f8e4ff 100%) !important;
+  box-shadow: 0 0 0 1px rgb(240 75 196 / 18%), 0 8px 18px rgb(190 111 181 / 16%);
+}
+html[data-theme="light"] .hero-featured-title {
+  color: #35203f !important;
+}
+html[data-theme="light"] .hero-featured-artist {
+  color: #8c65a5 !important;
+}
+html[data-theme="light"] .hero-featured-play {
+  color: #fff !important;
+  background: #ed38b9 !important;
+  border-color: #ff9be4 !important;
+}
+
+/* Light-mode speech bubble: match the pastel pink/lilac interface, not the dark neon theme */
+html[data-theme="light"] .pepe-bubble {
+  border-color: #f09bdf !important;
+  background: linear-gradient(145deg, #fffaff 0%, #f9eaff 100%) !important;
+  color: #35213f !important;
+  box-shadow: 5px 5px 0 #f3c8ec, 0 8px 24px rgb(208 113 191 / 16%) !important;
+}
+html[data-theme="light"] .pepe-bubble::after {
+  border-color: #f09bdf !important;
+  background: #f9eaff !important;
+}
+html[data-theme="light"] .pepe-bubble-kicker {
+  color: #009fbd !important;
+}
+html[data-theme="light"] .pepe-bubble-title {
+  color: #e52eae !important;
+}
+html[data-theme="light"] .pepe-bubble-text {
+  color: #4c3658 !important;
+}
+html[data-theme="light"] .pepe-bubble-status {
+  color: #9476a6 !important;
+}
+html[data-theme="light"] .pepe-bubble-close {
+  color: #e52eae !important;
+}

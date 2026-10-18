@@ -25,7 +25,7 @@ const chajzerSounds = [
   { title: "Andrzeju", text: "„Wiesz w ogóle taka ciekawostka...”", source: "chajzer/andrzeju.mp3" },
   { title: "Tłukło", text: "„ jak świetnie tańczyłaś ”", source: "chajzer/calyczas.mp3" },
   { title: "Piotr Żyła", text: "„No. Jadłaś kiedyś pizzę z kebabem?”", source: "chajzer/corka.mp3" },
-  { title: "Co to", text: "„Khu Khu. O... Kaszelek, kaszelek.”", source: "chajzer/coto.mp3" },
+  { title: "Co to się staneło?", text: "„Khu Khu. O... Kaszelek, kaszelek.”", source: "chajzer/coto.mp3" },
   { title: "Kierunkowskaz", text: "„Naprawdę? Naprawdę.”", source: "chajzer/kierunkowskaz.mp3" },
   { title: "MATKO JEDYNA", text: "„końcu? Love grooming? Love grooming.”", source: "chajzer/matkojedyna.mp3" },
   { title: "Pasztet", text: "„Że najchetniej ku”", source: "chajzer/PASZTET.mp3" },

@@ -1466,3 +1466,59 @@ html[data-theme="light"] .pepe-bubble-status {
 html[data-theme="light"] .pepe-bubble-close {
   color: #e52eae !important;
 }
+
+
+/* Active shuffle/repeat controls: darker icon color when enabled */
+#shuffle-button.active,
+#repeat-button.active,
+.player-control.active,
+button[aria-pressed="true"]#shuffle-button,
+button[aria-pressed="true"]#repeat-button {
+  color: #8b4c83 !important;
+}
+#shuffle-button.active svg,
+#repeat-button.active svg,
+.player-control.active svg {
+  color: #8b4c83 !important;
+  stroke: currentColor !important;
+}
+html[data-theme="light"] #shuffle-button.active,
+html[data-theme="light"] #repeat-button.active,
+html[data-theme="light"] .player-control.active {
+  color: #b52a91 !important;
+}
+html[data-theme="neon"] #shuffle-button.active,
+html[data-theme="neon"] #repeat-button.active,
+html[data-theme="neon"] .player-control.active {
+  color: #9c579b !important;
+}
+
+
+/* Aktywne losowanie: intensywny róż dopasowany do koloru ze zrzutu ekranu */
+#shuffle-button.active,
+#shuffle-button.active svg,
+#shuffle-button.active svg use {
+  color: #f000a5 !important;
+  stroke: #f000a5 !important;
+}
+html[data-theme="light"] #shuffle-button.active,
+html[data-theme="light"] #shuffle-button.active svg,
+html[data-theme="light"] #shuffle-button.active svg use {
+  color: #f000a5 !important;
+  stroke: #f000a5 !important;
+}
+
+
+/* Aktywna pętla powtarzania — ten sam intensywny róż co ikona losowania */
+#repeat-button.active,
+#repeat-button.active svg,
+#repeat-button.active svg use {
+  color: #f000a5 !important;
+  stroke: #f000a5 !important;
+}
+html[data-theme="light"] #repeat-button.active,
+html[data-theme="light"] #repeat-button.active svg,
+html[data-theme="light"] #repeat-button.active svg use {
+  color: #f000a5 !important;
+  stroke: #f000a5 !important;
+}

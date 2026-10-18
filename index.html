@@ -47,11 +47,18 @@
         <p class="nav-label">Twoi wykonawcy</p>
         <div class="mood-list" id="artist-filters-side"><button class="mood-item selected" data-filter="all"><span class="mood-dot dot-pink"></span>Cała kolekcja</button></div>
 
-        <button class="sidebar-note" id="pepe-sound" type="button" aria-label="Odtwórz losowy dźwięk Chajzera">
+        <button class="sidebar-note" id="pepe-sound" type="button" aria-label="Odtwórz losowy dźwięk Chajzera" aria-describedby="pepe-bubble">
           <span class="note-mark" aria-hidden="true">///</span>
           <p>nocny tryb,<br />głośne uczucia</p>
           <span class="note-sparkle" aria-hidden="true">✕</span>
         </button>
+        <div class="pepe-bubble" id="pepe-bubble" role="status" aria-live="polite" hidden>
+          <button class="pepe-bubble-close" id="pepe-bubble-close" type="button" aria-label="Zamknij dymek">×</button>
+          <span class="pepe-bubble-kicker">/// TRANSMISJA ŻABKI</span>
+          <strong class="pepe-bubble-title" id="pepe-bubble-title"></strong>
+          <p class="pepe-bubble-text" id="pepe-bubble-text"></p>
+          <span class="pepe-bubble-status" id="pepe-bubble-status">ODTWARZANIE...</span>
+        </div>
         <p class="sidebar-footer">Zrobione z miłości do muzyki <span>♥</span></p>
       </aside>
 

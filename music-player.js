@@ -4,15 +4,15 @@ const hiddenKey = "petal-fm-hidden-library-tracks-v1";
 const databaseName = "petal-fm-audio-v1";
 const fallbackArtwork = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23100914' d='M0 0h64v64H0z'/%3E%3Cpath fill='%23ff35b8' d='M28 8h8v16h12v8H36v24h-8V32H16v-8h12z'/%3E%3Cpath fill='%2300f0ff' d='M8 8h8v8H8zm40 40h8v8h-8z'/%3E%3C/svg%3E";
 const chajzerSounds = [
-  { title: "Bardzo dobra", source: "chajzer/bardzodobra.mp3" },
-  { title: "Ciekawostka", source: "chajzer/ciekawostka.mp3" },
-  { title: "Grill u Gawrona", source: "chajzer/grillugawrona.mp3" },
-  { title: "Jadłaś pizzę", source: "chajzer/jadlaspizze.mp3" },
-  { title: "Kaszelek", source: "chajzer/kaszelek.mp3" },
-  { title: "Naprawdę", source: "chajzer/naprawde.mp3" },
-  { title: "Nosowe ą", source: "chajzer/nosoweą.mp3" },
-  { title: "Pizza z kebabem", source: "chajzer/pizzazkebabem.mp3" },
-  { title: "Spróbujemy w Szwecji", source: "chajzer/sprobujemywszwecji.mp3" }
+  { title: "Bardzo dobra", text: "„Bardzo dobra!”", source: "chajzer/bardzodobra.mp3" },
+  { title: "Ciekawostka", text: "„Ciekawostka!”", source: "chajzer/ciekawostka.mp3" },
+  { title: "Grill u Gawrona", text: "„Grill u Gawrona!”", source: "chajzer/grillugawrona.mp3" },
+  { title: "Jadłaś pizzę", text: "„Jadłaś pizzę?”", source: "chajzer/jadlaspizze.mp3" },
+  { title: "Kaszelek", text: "„Kaszelek!”", source: "chajzer/kaszelek.mp3" },
+  { title: "Naprawdę", text: "„Naprawdę?”", source: "chajzer/naprawde.mp3" },
+  { title: "Nosowe ą", text: "„Nosowe ą!”", source: "chajzer/nosoweą.mp3" },
+  { title: "Pizza z kebabem", text: "„Pizza z kebabem!”", source: "chajzer/pizzazkebabem.mp3" },
+  { title: "Spróbujemy w Szwecji", text: "„Spróbujemy w Szwecji!”", source: "chajzer/sprobujemywszwecji.mp3" }
 ];
 const audio = document.querySelector("#audio");
 const trackList = document.querySelector("#track-list");
@@ -868,18 +868,76 @@ document.querySelector("#liked-nav").addEventListener("click", (event) => {
   event.currentTarget.classList.toggle("active", onlyLiked);
   render();
 });
-document.querySelector("#pepe-sound").addEventListener("click", () => {
-  const sound = chajzerSounds[Math.floor(Math.random() * chajzerSounds.length)];
-  const track = {
-    id: `chajzer-${sound.source}`,
-    title: sound.title,
-    artist: "Chajzer",
-    source: sound.source,
-    duration: 0,
-    artwork: fallbackArtwork
-  };
-  playTrack(track, [track.id]);
+const pepeAudio = new Audio();
+pepeAudio.preload = "none";
+let pepeIsSpeaking = false;
+let lastChajzerIndex = -1;
+let pepeBubbleHideTimer = null;
+
+const pepeBubble = document.querySelector("#pepe-bubble");
+const pepeBubbleTitle = document.querySelector("#pepe-bubble-title");
+const pepeBubbleText = document.querySelector("#pepe-bubble-text");
+const pepeBubbleStatus = document.querySelector("#pepe-bubble-status");
+const volumeSlider = document.querySelector("#volume");
+
+function updateMusicVolume() {
+  const selectedVolume = Number(volumeSlider.value);
+  audio.volume = selectedVolume * (pepeIsSpeaking ? 0.18 : 1);
+}
+
+function showPepeBubble(sound) {
+  window.clearTimeout(pepeBubbleHideTimer);
+  pepeBubbleTitle.textContent = sound.title;
+  pepeBubbleText.textContent = sound.text || `„${sound.title}”`;
+  pepeBubbleStatus.textContent = "ODTWARZAM WYPOWIEDŹ...";
+  pepeBubble.hidden = false;
+  pepeBubble.classList.remove("is-closing");
+}
+
+function hidePepeBubble() {
+  window.clearTimeout(pepeBubbleHideTimer);
+  pepeBubble.hidden = true;
+}
+
+function finishPepeSpeech() {
+  pepeIsSpeaking = false;
+  updateMusicVolume();
+  pepeBubbleStatus.textContent = "TRANSMISJA ZAKOŃCZONA";
+  pepeBubbleHideTimer = window.setTimeout(hidePepeBubble, 2200);
+}
+
+document.querySelector("#pepe-sound").addEventListener("click", async () => {
+  let nextIndex = Math.floor(Math.random() * chajzerSounds.length);
+  if (chajzerSounds.length > 1 && nextIndex === lastChajzerIndex) {
+    nextIndex = (nextIndex + 1 + Math.floor(Math.random() * (chajzerSounds.length - 1))) % chajzerSounds.length;
+  }
+  lastChajzerIndex = nextIndex;
+  const sound = chajzerSounds[nextIndex];
+
+  pepeAudio.pause();
+  pepeAudio.currentTime = 0;
+  pepeIsSpeaking = true;
+  updateMusicVolume();
+  showPepeBubble(sound);
+
+  pepeAudio.src = sound.source;
+  try {
+    await pepeAudio.play();
+  } catch (error) {
+    finishPepeSpeech();
+    pepeBubbleStatus.textContent = "NIE UDAŁO SIĘ ODTWORZYĆ";
+    showToast("Nie udało się odtworzyć dźwięku żabki.");
+  }
 });
+
+pepeAudio.addEventListener("ended", finishPepeSpeech);
+pepeAudio.addEventListener("error", () => {
+  if (pepeIsSpeaking) {
+    finishPepeSpeech();
+    pepeBubbleStatus.textContent = "NIE UDAŁO SIĘ ODTWORZYĆ";
+  }
+});
+document.querySelector("#pepe-bubble-close").addEventListener("click", hidePepeBubble);
 document.querySelector("#hero-play").addEventListener("click", () => {
   const selected = activePlaylist();
   if (selected) playPlaylist(selected.id);
@@ -913,7 +971,7 @@ document.querySelector("#repeat-button").addEventListener("click", () => {
   showToast(messages[repeatMode]);
 });
 document.querySelector("#current-like").addEventListener("click", () => { if (currentTrack) toggleLike(currentTrack.id); });
-document.querySelector("#volume").addEventListener("input", (event) => { audio.volume = Number(event.target.value); });
+document.querySelector("#volume").addEventListener("input", updateMusicVolume);
 progress.addEventListener("input", () => {
   updateProgressPaint();
   if (Number.isFinite(audio.duration)) audio.currentTime = (Number(progress.value) / 100) * audio.duration;
@@ -943,7 +1001,7 @@ document.addEventListener("keydown", (event) => {
   if (event.code === "Space" && document.activeElement !== searchInput && document.activeElement.tagName !== "BUTTON" && !dialog.open) { event.preventDefault(); togglePlayback(); }
 });
 
-audio.volume = Number(document.querySelector("#volume").value);
+updateMusicVolume();
 updateProgressPaint();
 installPlaylistUI();
 updateRepeatButton();

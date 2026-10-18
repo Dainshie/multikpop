@@ -899,3 +899,91 @@ html[data-theme="light"] .hero-art-image::after {
     display: none !important;
   }
 }
+
+
+/* Pepe speech bubble: separate from the music playlist/player */
+.sidebar { position: sticky; }
+.pepe-bubble[hidden] { display: none !important; }
+.pepe-bubble {
+  position: absolute;
+  z-index: 100;
+  right: calc(100% + 14px);
+  bottom: 94px;
+  width: min(280px, calc(100vw - 290px));
+  min-width: 220px;
+  padding: 16px 18px 13px;
+  border: 2px solid #a83998;
+  background: #170d20;
+  color: #f7e6fa;
+  box-shadow: 5px 5px 0 #3c1740, 0 0 24px rgb(255 53 184 / 12%);
+  font-family: var(--sans);
+}
+.pepe-bubble::after {
+  position: absolute;
+  right: -9px;
+  bottom: 25px;
+  width: 14px;
+  height: 14px;
+  border-top: 2px solid #a83998;
+  border-right: 2px solid #a83998;
+  background: #170d20;
+  content: "";
+  transform: rotate(45deg);
+}
+.pepe-bubble-kicker {
+  display: block;
+  margin: 0 20px 8px 0;
+  color: #00edff;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+.pepe-bubble-title {
+  display: block;
+  margin-bottom: 8px;
+  color: #ff45bf;
+  font-size: 15px;
+  line-height: 1.25;
+}
+.pepe-bubble-text {
+  margin: 0 0 12px;
+  color: #f3daf5;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.pepe-bubble-status {
+  display: block;
+  color: #b99ac6;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+.pepe-bubble-close {
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  border: 0;
+  background: transparent;
+  color: #ff45bf;
+  font-size: 21px;
+  line-height: 1;
+  cursor: pointer;
+}
+@media (max-width: 900px) {
+  .pepe-bubble {
+    right: 8px;
+    bottom: 205px;
+    width: min(260px, calc(100vw - 36px));
+    min-width: 0;
+  }
+  .pepe-bubble::after { display: none; }
+}
+@media (max-width: 760px) {
+  .pepe-bubble {
+    position: fixed;
+    z-index: 1000;
+    right: 12px;
+    bottom: 150px;
+    width: min(300px, calc(100vw - 24px));
+  }
+}

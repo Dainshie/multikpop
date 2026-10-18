@@ -1958,3 +1958,119 @@ html[data-theme="light"] #repeat-button.active svg use {
   .hero-featured-title { font-size: 13px !important; }
   .hero-featured-artist { font-size: 10px !important; }
 }
+
+
+/* FINAL table header alignment fix: one clean row, vertically centered */
+@media (min-width: 761px) {
+  .table-header {
+    display: grid !important;
+    grid-template-columns:
+      38px
+      minmax(220px, 1.45fr)
+      minmax(130px, 1fr)
+      42px
+      84px
+      62px
+      52px !important;
+    align-items: center !important;
+    min-height: 36px !important;
+    height: 36px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .table-header > span {
+    align-self: center !important;
+    justify-self: stretch !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100% !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    white-space: nowrap !important;
+  }
+
+  .table-header > span:nth-child(2),
+  .table-header > span:nth-child(3) {
+    justify-content: flex-start !important;
+  }
+
+  .table-header > span:nth-child(5),
+  .table-header > span:nth-child(6),
+  .table-header > span:nth-child(7) {
+    font-family: "Pixelify Sans", "Press Start 2P", monospace !important;
+    font-size: 8px !important;
+    font-weight: 700 !important;
+    letter-spacing: .35px !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  .table-header > span:nth-child(7) {
+    font-size: 7px !important;
+  }
+
+  .track-row {
+    grid-template-columns:
+      38px
+      minmax(220px, 1.45fr)
+      minmax(130px, 1fr)
+      42px
+      84px
+      62px
+      52px !important;
+    align-items: center !important;
+  }
+
+  .row-heart,
+  .row-add-playlist,
+  .track-duration,
+  .row-remove {
+    align-self: center !important;
+    justify-self: center !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+}
+
+
+/* FIX: legacy rule put the last heading (USUŃ) in column 6 with CZAS.
+   Explicitly assign all three headings to separate columns in the same row. */
+@media (min-width: 761px) {
+  .table-header > span:nth-child(5) {
+    grid-column: 5 !important;
+    grid-row: 1 !important;
+    align-self: center !important;
+    justify-self: stretch !important;
+    white-space: nowrap !important;
+  }
+  .table-header > span:nth-child(6) {
+    grid-column: 6 !important;
+    grid-row: 1 !important;
+    align-self: center !important;
+    justify-self: stretch !important;
+    white-space: nowrap !important;
+  }
+  .table-header > span:nth-child(7),
+  .table-header > span:last-child {
+    grid-column: 7 !important;
+    grid-row: 1 !important;
+    align-self: center !important;
+    justify-self: stretch !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+    font-family: "Pixelify Sans", "Press Start 2P", monospace !important;
+    font-size: 7px !important;
+    line-height: 1 !important;
+    letter-spacing: .25px !important;
+  }
+}

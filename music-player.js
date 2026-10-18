@@ -54,6 +54,13 @@ const artworkUrls = new Map();
 const artworkRequests = new Set();
 const metadataRequests = new Set();
 
+function splitArtists(value) {
+  return String(value || "")
+    .split(/[,;\n]+/)
+    .map((artist) => artist.trim())
+    .filter(Boolean);
+}
+
 function loadSaved(key) {
   try {
     const value = JSON.parse(localStorage.getItem(key) || "[]");
@@ -469,7 +476,7 @@ function removeTrackFromActivePlaylist(trackId) {
 }
 
 function renderFilters() {
-  const artists = [...new Set(tracks.map((track) => track.artist))];
+  const artists = [...new Set(tracks.flatMap((track) => splitArtists(track.artist)))].sort((a, b) => a.localeCompare(b, "pl"));
   if (activeFilter !== "all" && !artists.includes(activeFilter)) activeFilter = "all";
   const filterButtons = (includeAll) => [
     ...(includeAll ? [{ value: "all", label: "Wszystko" }] : [{ value: "all", label: "Cała kolekcja" }]),
@@ -486,7 +493,7 @@ function renderTracks() {
   const visibleTracks = tracks.filter((track) => {
     const selectedPlaylist = activePlaylist();
     const matchesPlaylist = !selectedPlaylist || selectedPlaylist.trackIds.includes(track.id);
-    const matchesArtist = activeFilter === "all" || track.artist === activeFilter;
+    const matchesArtist = activeFilter === "all" || splitArtists(track.artist).includes(activeFilter);
     const matchesSearch = `${track.title} ${track.artist}`.toLocaleLowerCase("pl").includes(query);
     return matchesPlaylist && matchesArtist && matchesSearch && (!onlyLiked || liked.has(track.id));
   });

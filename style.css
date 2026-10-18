@@ -1522,3 +1522,40 @@ html[data-theme="light"] #repeat-button.active svg use {
   color: #f000a5 !important;
   stroke: #f000a5 !important;
 }
+
+
+/* Sidebar layout fix: keep Pepe at a consistent size as artists/playlists are added */
+@media (min-width: 761px) {
+  .sidebar {
+    overflow-y: auto !important;
+    scrollbar-width: thin;
+    scrollbar-color: #8f3d83 transparent;
+  }
+  .sidebar-note {
+    flex: 0 0 150px !important;
+    width: 100% !important;
+    max-width: 190px !important;
+    height: 150px !important;
+    min-height: 150px !important;
+    aspect-ratio: auto !important;
+    align-self: center !important;
+    margin-top: 16px !important;
+    margin-bottom: 10px !important;
+    transform: none !important;
+  }
+  .sidebar-footer {
+    flex: 0 0 auto !important;
+  }
+  .user-playlists-menu {
+    flex: 0 0 auto !important;
+    min-height: 0 !important;
+  }
+  .playlist-menu-list {
+    max-height: min(150px, 18vh) !important;
+  }
+}
+@media (max-width: 760px) {
+  .sidebar-note {
+    flex-shrink: 0 !important;
+  }
+}

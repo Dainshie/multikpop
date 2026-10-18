@@ -70,5 +70,69 @@
     "src": "music/user-9171bd9f-6d7d-42c8-be55-342e474f5339.mp3",
     "artwork": "music/user-6fa11d3f-59a5-4051-b625-92161b5986aa.jpg",
     "duration": 0
+  },
+  {
+    "id": "9569ce3f-bcb6-479f-90d2-c4ca2361c530",
+    "title": "I Got Your Back",
+    "artist": "ILLIT",
+    "src": "music/user-65c728ee-f1c2-426d-b235-ddabf88b2d74.mp3",
+    "artwork": "music/user-8bdb158a-5dcb-4e96-928d-bcd668adf38e.jpg",
+    "duration": 0
+  },
+  {
+    "id": "af4635de-145c-4396-8ddd-6b76d1564eb5",
+    "title": "Sunday Morning",
+    "artist": "ILLIT",
+    "src": "music/user-85bb042b-1ca8-4255-885b-df89d1f0ff93.mp3",
+    "artwork": "music/user-191504a4-01da-4720-b009-1253a1d42de9.jpg",
+    "duration": 0
+  },
+  {
+    "id": "734cf44c-bcf3-4aa8-b56e-8baf227d772d",
+    "title": "PINKY  UP",
+    "artist": "KATSEYE",
+    "src": "music/user-3b54c0e7-1562-454a-920a-eeb51a9038f7.mp3",
+    "artwork": "music/user-d30d7977-262d-4aa1-8856-0659ec5fee56.jpg",
+    "duration": 0
+  },
+  {
+    "id": "db8ad93a-c789-4927-a5d6-c85e0d3dc2e4",
+    "title": "Animal",
+    "artist": "KATSEYE",
+    "src": "music/user-586cee0e-2e99-475d-b256-ee868afe3a4a.mp3",
+    "artwork": "music/user-a7a5e70b-98df-4e09-aab9-5ba6989cd99d.jpg",
+    "duration": 0
+  },
+  {
+    "id": "3d20870f-63e9-4004-807f-79ef81e1aadd",
+    "title": "Hootie Frutti",
+    "artist": "KATSEYE",
+    "src": "music/user-b4f255d9-fdf2-4ace-acd8-e730d6ad1529.mp3",
+    "artwork": "music/user-cfcb9d0f-f946-47b2-8d2c-53dc9764b045.jpg",
+    "duration": 0
+  },
+  {
+    "id": "23229b78-7d51-4dcf-915a-db73774c864c",
+    "title": "Bel Air",
+    "artist": "KATSEYE",
+    "src": "music/user-8e4b7113-3a3c-4982-b193-63d1642795ff.mp3",
+    "artwork": "music/user-30cc8fa5-5a86-4a98-bb1d-673b5d971f17.jpg",
+    "duration": 0
+  },
+  {
+    "id": "39054c8b-c56a-4699-b59f-6fb7550636c8",
+    "title": "That Way",
+    "artist": "KATSEYE",
+    "src": "music/user-347008f0-1b7e-420c-a119-7e1221c046db.mp3",
+    "artwork": "music/user-9ada3211-e5af-4f7a-a15c-88da617457ce.jpg",
+    "duration": 0
+  },
+  {
+    "id": "6c5a3342-3e1b-42da-9a66-f6147a12f4c9",
+    "title": "ICONIC BY MISTAKE",
+    "artist": "ILLIT, KATSEYE",
+    "src": "music/user-10b4be61-54c9-43c0-94c0-11c676982482.mp3",
+    "artwork": "music/user-ba062800-6ef1-4e5f-b2f6-af013c34c63b.jpg",
+    "duration": 0
   }
 ]

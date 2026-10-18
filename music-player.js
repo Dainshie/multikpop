@@ -3,6 +3,17 @@ const likedKey = "petal-fm-mp3-liked-v1";
 const hiddenKey = "petal-fm-hidden-library-tracks-v1";
 const databaseName = "petal-fm-audio-v1";
 const fallbackArtwork = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23100914' d='M0 0h64v64H0z'/%3E%3Cpath fill='%23ff35b8' d='M28 8h8v16h12v8H36v24h-8V32H16v-8h12z'/%3E%3Cpath fill='%2300f0ff' d='M8 8h8v8H8zm40 40h8v8h-8z'/%3E%3C/svg%3E";
+const chajzerSounds = [
+  { title: "Bardzo dobra", source: "chajzer/bardzodobra.mp3" },
+  { title: "Ciekawostka", source: "chajzer/ciekawostka.mp3" },
+  { title: "Grill u Gawrona", source: "chajzer/grillugawrona.mp3" },
+  { title: "Jadłaś pizzę", source: "chajzer/jadlaspizze.mp3" },
+  { title: "Kaszelek", source: "chajzer/kaszelek.mp3" },
+  { title: "Naprawdę", source: "chajzer/naprawde.mp3" },
+  { title: "Nosowe ą", source: "chajzer/nosoweą.mp3" },
+  { title: "Pizza z kebabem", source: "chajzer/pizzazkebabem.mp3" },
+  { title: "Spróbujemy w Szwecji", source: "chajzer/sprobujemywszwecji.mp3" }
+];
 const audio = document.querySelector("#audio");
 const trackList = document.querySelector("#track-list");
 const searchInput = document.querySelector("#search-input");
@@ -856,6 +867,18 @@ document.querySelector("#liked-nav").addEventListener("click", (event) => {
   activeFilter = "all";
   event.currentTarget.classList.toggle("active", onlyLiked);
   render();
+});
+document.querySelector("#pepe-sound").addEventListener("click", () => {
+  const sound = chajzerSounds[Math.floor(Math.random() * chajzerSounds.length)];
+  const track = {
+    id: `chajzer-${sound.source}`,
+    title: sound.title,
+    artist: "Chajzer",
+    source: sound.source,
+    duration: 0,
+    artwork: fallbackArtwork
+  };
+  playTrack(track, [track.id]);
 });
 document.querySelector("#hero-play").addEventListener("click", () => {
   const selected = activePlaylist();

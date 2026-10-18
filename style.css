@@ -1559,3 +1559,187 @@ html[data-theme="light"] #repeat-button.active svg use {
     flex-shrink: 0 !important;
   }
 }
+
+
+/* Keep the Pepe card pinned to the bottom corner of the sidebar.
+   Only the sidebar's artist/playlist area scrolls; no horizontal scrollbar. */
+@media (min-width: 761px) {
+  .sidebar {
+    position: sticky !important;
+    top: 0 !important;
+    height: calc(100vh - 94px) !important;
+    min-height: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  #artist-filters-side,
+  .user-playlists-menu {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #artist-filters-side {
+    flex: 0 1 auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    max-height: 22vh !important;
+    scrollbar-width: thin;
+  }
+
+  .user-playlists-menu {
+    flex: 0 1 auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    max-height: 24vh !important;
+    scrollbar-width: thin;
+  }
+
+  .sidebar-note {
+    position: relative !important;
+    flex: 0 0 150px !important;
+    width: 100% !important;
+    max-width: 190px !important;
+    height: 150px !important;
+    min-height: 150px !important;
+    margin: auto 1px 10px !important;
+    align-self: center !important;
+    box-sizing: border-box !important;
+  }
+
+  .sidebar-footer {
+    flex: 0 0 auto !important;
+    margin-top: 0 !important;
+  }
+}
+
+/* Prevent horizontal scrolling caused by sidebar widgets at every screen size */
+.sidebar,
+.sidebar * {
+  box-sizing: border-box;
+}
+.sidebar {
+  overflow-x: clip !important;
+}
+.user-playlists-menu,
+.playlist-menu-list,
+.playlist-menu-row,
+#artist-filters-side {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+.playlist-menu-list {
+  overflow-x: hidden !important;
+}
+
+
+/* Final sidebar correction: keep the Pepe bubble outside the clipped sidebar,
+   and make the sidebar meet the fixed player without a bottom gap. */
+@media (min-width: 761px) {
+  .sidebar {
+    height: calc(100vh - 94px) !important;
+    min-height: 0 !important;
+    margin-bottom: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+  }
+
+  .pepe-bubble {
+    position: fixed !important;
+    right: auto !important;
+    bottom: 108px !important;
+    left: 10px;
+    z-index: 9999 !important;
+    width: 280px !important;
+    max-width: min(280px, calc(100vw - 24px)) !important;
+    min-width: 0 !important;
+  }
+}
+@media (max-width: 760px) {
+  .pepe-bubble {
+    position: fixed !important;
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 100px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    z-index: 9999 !important;
+  }
+}
+
+
+/* Final spacing fix: sidebar ends flush with the fixed bottom player */
+@media (min-width: 761px) {
+  .app-shell {
+    min-height: calc(100vh - 80px) !important;
+  }
+  .sidebar {
+    height: calc(100vh - 80px) !important;
+    min-height: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 10px !important;
+  }
+
+  /* Keep Pepe in the bottom corner without shrinking when lists grow */
+  .sidebar-note {
+    flex: 0 0 150px !important;
+    height: 150px !important;
+    min-height: 150px !important;
+    margin-top: auto !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* The bubble's pointer should line up with Pepe vertically */
+  .pepe-bubble::after {
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) rotate(45deg) !important;
+  }
+}
+.pepe-bubble[hidden] {
+  display: none !important;
+}
+
+
+/* Tighten the gap between the speech bubble content and its bottom edge */
+.pepe-bubble {
+  padding-bottom: 7px !important;
+}
+.pepe-bubble-status {
+  margin-bottom: 0 !important;
+  line-height: 1.2 !important;
+}
+.pepe-bubble-text {
+  margin-bottom: 8px !important;
+}
+
+
+/* Definitive fix: let the speech bubble shrink-wrap its text instead of keeping excess height */
+.pepe-bubble:not([hidden]) {
+  display: block !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  box-sizing: border-box !important;
+  padding-top: 12px !important;
+  padding-bottom: 8px !important;
+}
+.pepe-bubble-kicker,
+.pepe-bubble-title,
+.pepe-bubble-text,
+.pepe-bubble-status {
+  flex: 0 0 auto !important;
+}
+.pepe-bubble-title {
+  margin-top: 0 !important;
+  margin-bottom: 6px !important;
+}
+.pepe-bubble-text {
+  margin-top: 0 !important;
+  margin-bottom: 7px !important;
+}
+.pepe-bubble-status {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}

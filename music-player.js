@@ -1085,7 +1085,47 @@ function showPepeBubble(sound) {
   pepeBubbleStatus.textContent = "ODTWARZAM WYPOWIEDŹ...";
   pepeBubble.hidden = false;
   pepeBubble.classList.remove("is-closing");
+
+  // Keep the speech bubble beside Pepe and vertically centered on the image.
+  const placePepeBubble = () => {
+    const button = document.querySelector("#pepe-sound");
+    if (!button || pepeBubble.hidden) return;
+    const rect = button.getBoundingClientRect();
+    const gap = 14;
+    const bubbleWidth = Math.min(280, window.innerWidth - 24);
+    const left = Math.max(12, Math.min(rect.left - bubbleWidth - gap, window.innerWidth - bubbleWidth - 12));
+    const bubbleHeight = pepeBubble.getBoundingClientRect().height;
+    const player = document.querySelector(".player");
+    const playerTop = player ? player.getBoundingClientRect().top : window.innerHeight - 80;
+    const top = Math.max(12, Math.min(
+      rect.top + rect.height / 2 - bubbleHeight / 2,
+      playerTop - bubbleHeight - 12
+    ));
+    pepeBubble.style.left = `${left}px`;
+    pepeBubble.style.right = "auto";
+    pepeBubble.style.top = `${top}px`;
+    pepeBubble.style.bottom = "auto";
+  };
+  requestAnimationFrame(placePepeBubble);
 }
+
+window.addEventListener("resize", () => {
+  if (!pepeBubble.hidden) {
+    const button = document.querySelector("#pepe-sound");
+    if (!button) return;
+    const rect = button.getBoundingClientRect();
+    const bubbleWidth = Math.min(280, window.innerWidth - 24);
+    const left = Math.max(12, Math.min(rect.left - bubbleWidth - 14, window.innerWidth - bubbleWidth - 12));
+    const bubbleHeight = pepeBubble.getBoundingClientRect().height;
+    const player = document.querySelector(".player");
+    const playerTop = player ? player.getBoundingClientRect().top : window.innerHeight - 80;
+    const top = Math.max(12, Math.min(rect.top + rect.height / 2 - bubbleHeight / 2, playerTop - bubbleHeight - 12));
+    pepeBubble.style.left = `${left}px`;
+    pepeBubble.style.right = "auto";
+    pepeBubble.style.top = `${top}px`;
+    pepeBubble.style.bottom = "auto";
+  }
+});
 
 function hidePepeBubble() {
   window.clearTimeout(pepeBubbleHideTimer);

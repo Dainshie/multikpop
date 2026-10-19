@@ -1318,759 +1318,260 @@ html[data-theme="light"] .hero-art-image::after {
 }
 
 
-/* MultiKpop: jeszcze większe tytuły polecanych utworów */
-@media (min-width: 1101px) {
-  .hero-featured-title {
-    font-size: 16px !important;
-    line-height: 1.3 !important;
-    font-weight: 800 !important;
-    min-height: 2.6em;
-    margin-top: 11px !important;
-    letter-spacing: .2px;
-  }
-  .hero-featured-artist {
-    font-size: 12px !important;
-    line-height: 1.4 !important;
-  }
-}
-@media (min-width: 761px) and (max-width: 1100px) {
-  .hero-featured-title {
-    font-size: 13px !important;
-    line-height: 1.3 !important;
-    font-weight: 800 !important;
-  }
-  .hero-featured-artist {
-    font-size: 10px !important;
-  }
-}
-
-
-/* MultiKpop: put previous/next previews at the far edges of the bottom player */
-@media (min-width: 1101px) {
-  .player {
-    grid-template-columns:
-      minmax(190px, 1fr)
-      minmax(170px, .85fr)
-      minmax(320px, 1.5fr)
-      minmax(145px, .7fr)
-      minmax(190px, 1fr) !important;
-    gap: 18px !important;
-    padding-left: 22px !important;
-    padding-right: 22px !important;
-  }
-
-  /* DOM order: current track, previous preview, controls, next preview, volume.
-     Place the previews at the outer edges, away from the playback buttons. */
-  .queue-preview-prev {
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-    justify-self: start;
-    width: 100%;
-    max-width: 230px;
-  }
-  .now-playing {
-    grid-column: 2 !important;
-    grid-row: 1 !important;
-  }
-  .player-center {
-    grid-column: 3 !important;
-    grid-row: 1 !important;
-    min-width: 0;
-  }
-  .player-volume {
-    grid-column: 4 !important;
-    grid-row: 1 !important;
-    min-width: 0;
-  }
-  .queue-preview-next {
-    grid-column: 5 !important;
-    grid-row: 1 !important;
-    justify-self: end;
-    width: 100%;
-    max-width: 230px;
-  }
-}
-
-/* Move the three featured track cards further left, leaving more breathing room before the car */
-@media (min-width: 1440px) {
-  .hero-featured-showcase {
-    transform: translateX(-78px) !important;
-    width: calc(100% + 42px) !important;
-  }
-  .hero-featured-tracks {
-    gap: 16px !important;
-  }
-}
-@media (min-width: 1101px) and (max-width: 1439px) {
-  .hero-featured-showcase {
-    transform: translateX(-48px) !important;
-    width: calc(100% + 24px) !important;
-  }
-}
-@media (max-width: 1100px) {
-  .hero-featured-showcase {
-    transform: none !important;
-    width: 100% !important;
-  }
-}
-
-
-/* MultiKpop: coherent pastel styling for song cards and Pepe speech bubble in LIGHT mode */
-html[data-theme="light"] .hero-featured-track {
-  border-color: #eea6df !important;
-  background: linear-gradient(160deg, #fffaff 0%, #fcefff 100%) !important;
-  color: #30213e !important;
-  box-shadow: 0 3px 10px rgb(190 111 181 / 10%);
-}
-html[data-theme="light"] .hero-featured-track:hover,
-html[data-theme="light"] .hero-featured-track:focus-visible {
-  border-color: #f04bc4 !important;
-  background: linear-gradient(160deg, #fff 0%, #f8e4ff 100%) !important;
-  box-shadow: 0 0 0 1px rgb(240 75 196 / 18%), 0 8px 18px rgb(190 111 181 / 16%);
-}
-html[data-theme="light"] .hero-featured-title {
-  color: #35203f !important;
-}
-html[data-theme="light"] .hero-featured-artist {
-  color: #8c65a5 !important;
-}
-html[data-theme="light"] .hero-featured-play {
-  color: #fff !important;
-  background: #ed38b9 !important;
-  border-color: #ff9be4 !important;
-}
-
-/* Light-mode speech bubble: match the pastel pink/lilac interface, not the dark neon theme */
-html[data-theme="light"] .pepe-bubble {
-  border-color: #f09bdf !important;
-  background: linear-gradient(145deg, #fffaff 0%, #f9eaff 100%) !important;
-  color: #35213f !important;
-  box-shadow: 5px 5px 0 #f3c8ec, 0 8px 24px rgb(208 113 191 / 16%) !important;
-}
-html[data-theme="light"] .pepe-bubble::after {
-  border-color: #f09bdf !important;
-  background: #f9eaff !important;
-}
-html[data-theme="light"] .pepe-bubble-kicker {
-  color: #009fbd !important;
-}
-html[data-theme="light"] .pepe-bubble-title {
-  color: #e52eae !important;
-}
-html[data-theme="light"] .pepe-bubble-text {
-  color: #4c3658 !important;
-}
-html[data-theme="light"] .pepe-bubble-status {
-  color: #9476a6 !important;
-}
-html[data-theme="light"] .pepe-bubble-close {
-  color: #e52eae !important;
-}
-
-
-/* Active shuffle/repeat controls: darker icon color when enabled */
-#shuffle-button.active,
-#repeat-button.active,
-.player-control.active,
-button[aria-pressed="true"]#shuffle-button,
-button[aria-pressed="true"]#repeat-button {
-  color: #8b4c83 !important;
-}
-#shuffle-button.active svg,
-#repeat-button.active svg,
-.player-control.active svg {
-  color: #8b4c83 !important;
-  stroke: currentColor !important;
-}
-html[data-theme="light"] #shuffle-button.active,
-html[data-theme="light"] #repeat-button.active,
-html[data-theme="light"] .player-control.active {
-  color: #b52a91 !important;
-}
-html[data-theme="neon"] #shuffle-button.active,
-html[data-theme="neon"] #repeat-button.active,
-html[data-theme="neon"] .player-control.active {
-  color: #9c579b !important;
-}
-
-
-/* Aktywne losowanie: intensywny róż dopasowany do koloru ze zrzutu ekranu */
-#shuffle-button.active,
-#shuffle-button.active svg,
-#shuffle-button.active svg use {
-  color: #f000a5 !important;
-  stroke: #f000a5 !important;
-}
-html[data-theme="light"] #shuffle-button.active,
-html[data-theme="light"] #shuffle-button.active svg,
-html[data-theme="light"] #shuffle-button.active svg use {
-  color: #f000a5 !important;
-  stroke: #f000a5 !important;
-}
-
-
-/* Aktywna pętla powtarzania — ten sam intensywny róż co ikona losowania */
-#repeat-button.active,
-#repeat-button.active svg,
-#repeat-button.active svg use {
-  color: #f000a5 !important;
-  stroke: #f000a5 !important;
-}
-html[data-theme="light"] #repeat-button.active,
-html[data-theme="light"] #repeat-button.active svg,
-html[data-theme="light"] #repeat-button.active svg use {
-  color: #f000a5 !important;
-  stroke: #f000a5 !important;
-}
-
-
-/* Sidebar layout fix: keep Pepe at a consistent size as artists/playlists are added */
+/* FIX: scroll only the artist and playlist lists, not the entire sidebar */
 @media (min-width: 761px) {
-  .sidebar {
+  .app-shell > .sidebar {
+    overflow: visible !important;
+    scrollbar-width: none !important;
+  }
+  .app-shell > .sidebar::-webkit-scrollbar { display: none !important; }
+  #artist-filters-side.mood-list {
+    display: grid !important;
+    gap: 5px !important;
+    max-height: min(30vh, 250px) !important;
     overflow-y: auto !important;
-    scrollbar-width: thin;
-    scrollbar-color: #8f3d83 transparent;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain;
+    scrollbar-width: thin !important;
+    scrollbar-color: #a83998 #170d20 !important;
+    padding-right: 4px !important;
   }
-  .sidebar-note {
-    flex: 0 0 150px !important;
-    width: 100% !important;
-    max-width: 190px !important;
-    height: 150px !important;
-    min-height: 150px !important;
-    aspect-ratio: auto !important;
-    align-self: center !important;
-    margin-top: 16px !important;
-    margin-bottom: 10px !important;
-    transform: none !important;
+  #artist-filters-side::-webkit-scrollbar,
+  #playlist-menu-list::-webkit-scrollbar { width: 6px !important; }
+  #artist-filters-side::-webkit-scrollbar-track,
+  #playlist-menu-list::-webkit-scrollbar-track { background: #170d20 !important; }
+  #artist-filters-side::-webkit-scrollbar-thumb,
+  #playlist-menu-list::-webkit-scrollbar-thumb {
+    background: #a83998 !important;
+    border: 1px solid #f04acb !important;
   }
-  .sidebar-footer {
-    flex: 0 0 auto !important;
-  }
-  .user-playlists-menu {
-    flex: 0 0 auto !important;
-    min-height: 0 !important;
-  }
-  .playlist-menu-list {
-    max-height: min(150px, 18vh) !important;
+  #playlist-menu-list {
+    max-height: min(24vh, 190px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain;
+    scrollbar-width: thin !important;
+    scrollbar-color: #a83998 #170d20 !important;
+    padding-right: 4px !important;
   }
 }
+
+/* On small screens keep the artist and playlist lists independently scrollable. */
 @media (max-width: 760px) {
-  .sidebar-note {
-    flex-shrink: 0 !important;
+  .app-shell > .sidebar {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
   }
-}
-
-
-/* Keep the Pepe card pinned to the bottom corner of the sidebar.
-   Only the sidebar's artist/playlist area scrolls; no horizontal scrollbar. */
-@media (min-width: 761px) {
-  .sidebar {
-    position: sticky !important;
-    top: 0 !important;
-    height: calc(100vh - 94px) !important;
-    min-height: 0 !important;
-    overflow-x: hidden !important;
-    overflow-y: hidden !important;
-    box-sizing: border-box !important;
-  }
-
-  #artist-filters-side,
-  .user-playlists-menu {
-    min-width: 0 !important;
-    max-width: 100% !important;
-  }
-
-  #artist-filters-side {
-    flex: 0 1 auto !important;
+  #artist-filters-side.mood-list {
+    display: grid !important;
+    max-height: 180px !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
-    max-height: 22vh !important;
-    scrollbar-width: thin;
+    scrollbar-width: thin !important;
+    scrollbar-color: #a83998 #170d20 !important;
   }
-
-  .user-playlists-menu {
-    flex: 0 1 auto !important;
+  #playlist-menu-list {
+    max-height: 150px !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
-    max-height: 24vh !important;
-    scrollbar-width: thin;
+    scrollbar-width: thin !important;
+    scrollbar-color: #a83998 #170d20 !important;
   }
-
-  .sidebar-note {
+  /* The mobile layout previously hid the Pepe button and its bubble. */
+  .app-shell > .sidebar .sidebar-note {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     position: relative !important;
-    flex: 0 0 150px !important;
-    width: 100% !important;
-    max-width: 190px !important;
-    height: 150px !important;
-    min-height: 150px !important;
-    margin: auto 1px 10px !important;
-    align-self: center !important;
-    box-sizing: border-box !important;
-  }
-
-  .sidebar-footer {
-    flex: 0 0 auto !important;
-    margin-top: 0 !important;
+    width: 112px !important;
+    max-width: 112px !important;
+    height: 112px !important;
+    min-height: 112px !important;
+    aspect-ratio: 1 / 1 !important;
+    margin: 16px auto 8px !important;
+    flex: 0 0 112px !important;
+    transform: none !important;
   }
 }
 
-/* Prevent horizontal scrolling caused by sidebar widgets at every screen size */
-.sidebar,
-.sidebar * {
-  box-sizing: border-box;
-}
-.sidebar {
-  overflow-x: clip !important;
-}
-.user-playlists-menu,
-.playlist-menu-list,
-.playlist-menu-row,
-#artist-filters-side {
+/* Bubble is positioned from the Pepe button by JS, so it stays beside the frog. */
+#pepe-bubble:not([hidden]) {
+  position: fixed !important;
+  z-index: 2000 !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: min(280px, calc(100vw - 24px)) !important;
   min-width: 0 !important;
-  max-width: 100% !important;
+  max-width: calc(100vw - 24px) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: calc(100dvh - 24px) !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
 }
-.playlist-menu-list {
-  overflow-x: hidden !important;
-}
-
-
-/* Final sidebar correction: keep the Pepe bubble outside the clipped sidebar,
-   and make the sidebar meet the fixed player without a bottom gap. */
-@media (min-width: 761px) {
-  .sidebar {
-    height: calc(100vh - 94px) !important;
-    min-height: 0 !important;
-    margin-bottom: 0 !important;
-    overflow-x: hidden !important;
-    overflow-y: hidden !important;
-  }
-
-  .pepe-bubble {
-    position: fixed !important;
-    right: auto !important;
-    bottom: 108px !important;
-    left: 10px;
-    z-index: 9999 !important;
-    width: 280px !important;
-    max-width: min(280px, calc(100vw - 24px)) !important;
-    min-width: 0 !important;
-  }
-}
-@media (max-width: 760px) {
-  .pepe-bubble {
-    position: fixed !important;
-    left: 12px !important;
-    right: 12px !important;
-    bottom: 100px !important;
-    width: auto !important;
-    min-width: 0 !important;
-    z-index: 9999 !important;
-  }
+#pepe-bubble::after { display: block !important; }
+@media (max-width: 900px) {
+  #pepe-bubble:not([hidden]) { width: min(280px, calc(100vw - 24px)) !important; }
 }
 
 
-/* Final spacing fix: sidebar ends flush with the fixed bottom player */
-@media (min-width: 761px) {
-  .app-shell {
-    min-height: calc(100vh - 80px) !important;
-  }
-  .sidebar {
-    height: calc(100vh - 80px) !important;
-    min-height: 0 !important;
-    margin-bottom: 0 !important;
-    padding-bottom: 10px !important;
-  }
-
-  /* Keep Pepe in the bottom corner without shrinking when lists grow */
-  .sidebar-note {
-    flex: 0 0 150px !important;
-    height: 150px !important;
-    min-height: 150px !important;
-    margin-top: auto !important;
-    margin-bottom: 8px !important;
-  }
-
-  /* The bubble's pointer should line up with Pepe vertically */
-  .pepe-bubble::after {
-    top: 50% !important;
-    bottom: auto !important;
-    transform: translateY(-50%) rotate(45deg) !important;
-  }
+/* === FINAL SIDEBAR LAYOUT: only artists/playlists scroll; Pepe stays large at the corner === */
+.sidebar {
+  position: sticky !important;
+  top: 0 !important;
+  align-self: start !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: calc(100dvh - 80px) !important;
+  max-height: calc(100dvh - 80px) !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  scrollbar-width: none !important;
+  box-sizing: border-box !important;
 }
-.pepe-bubble[hidden] {
+.sidebar::-webkit-scrollbar {
   display: none !important;
 }
 
-
-/* Tighten the gap between the speech bubble content and its bottom edge */
-.pepe-bubble {
-  padding-bottom: 7px !important;
+/* Artist list gets its own scrollbar */
+#artist-filters-side.mood-list {
+  display: grid !important;
+  flex: 0 1 auto !important;
+  min-height: 70px !important;
+  max-height: min(24vh, 220px) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior: contain !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #a83998 #170d20 !important;
+  padding-right: 5px !important;
 }
-.pepe-bubble-status {
-  margin-bottom: 0 !important;
-  line-height: 1.2 !important;
+
+/* Playlist section is compact; only its entries scroll */
+#user-playlists-menu.user-playlists-menu {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 0 1 auto !important;
+  min-height: 0 !important;
+  max-height: min(29vh, 245px) !important;
+  overflow: hidden !important;
 }
-.pepe-bubble-text {
-  margin-bottom: 8px !important;
+#playlist-menu-list.playlist-menu-list {
+  flex: 0 1 auto !important;
+  min-height: 38px !important;
+  max-height: min(23vh, 190px) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior: contain !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #a83998 #170d20 !important;
+  padding-right: 5px !important;
 }
 
+#artist-filters-side::-webkit-scrollbar,
+#playlist-menu-list::-webkit-scrollbar {
+  width: 6px !important;
+}
+#artist-filters-side::-webkit-scrollbar-track,
+#playlist-menu-list::-webkit-scrollbar-track {
+  background: #170d20 !important;
+}
+#artist-filters-side::-webkit-scrollbar-thumb,
+#playlist-menu-list::-webkit-scrollbar-thumb {
+  background: #a83998 !important;
+  border: 1px solid #f04acb !important;
+}
 
-/* Definitive fix: let the speech bubble shrink-wrap its text instead of keeping excess height */
-.pepe-bubble:not([hidden]) {
+/* Large Pepe anchored at the bottom corner, outside the scrolling lists */
+.sidebar #pepe-sound.sidebar-note {
   display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  align-self: flex-end !important;
+  flex: 0 0 auto !important;
+  width: clamp(150px, 78%, 205px) !important;
+  max-width: 205px !important;
   height: auto !important;
   min-height: 0 !important;
-  max-height: none !important;
-  box-sizing: border-box !important;
-  padding-top: 12px !important;
-  padding-bottom: 8px !important;
-}
-.pepe-bubble-kicker,
-.pepe-bubble-title,
-.pepe-bubble-text,
-.pepe-bubble-status {
-  flex: 0 0 auto !important;
-}
-.pepe-bubble-title {
-  margin-top: 0 !important;
-  margin-bottom: 6px !important;
-}
-.pepe-bubble-text {
-  margin-top: 0 !important;
-  margin-bottom: 7px !important;
-}
-.pepe-bubble-status {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
-
-
-/* Compact speech bubble: remove the fixed-looking empty area under the status line */
-#pepe-bubble:not([hidden]) {
-  display: block !important;
-  height: fit-content !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  padding: 10px 18px 8px !important;
+  aspect-ratio: 1 / 1 !important;
+  margin: auto 0 4px auto !important;
+  transform: none !important;
+  padding: 0 !important;
+  background-image: url("pepe-emote-user-image.png") !important;
+  background-position: center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  border: 0 !important;
+  box-shadow: none !important;
   overflow: visible !important;
 }
-#pepe-bubble .pepe-bubble-kicker {
-  margin-bottom: 6px !important;
+.sidebar #pepe-sound .note-mark,
+.sidebar #pepe-sound p,
+.sidebar #pepe-sound .note-sparkle {
+  display: none !important;
 }
-#pepe-bubble .pepe-bubble-title {
-  margin-bottom: 5px !important;
-  line-height: 1.2 !important;
-}
-#pepe-bubble .pepe-bubble-text {
-  margin-bottom: 5px !important;
-  line-height: 1.35 !important;
-}
-#pepe-bubble .pepe-bubble-status {
-  display: block !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  line-height: 1.15 !important;
+.sidebar .sidebar-footer {
+  flex: 0 0 auto !important;
+  margin: 0 0 2px 3px !important;
 }
 
-
-/* Make the CZAS column heading easier to read and nudge it slightly right */
-.table-header span:nth-child(5) {
-  font-family: Arial, Helvetica, sans-serif !important;
-  font-size: 9px !important;
-  font-weight: 800 !important;
-  letter-spacing: 1.15px !important;
-  color: #e3c6df !important;
-  text-align: center !important;
-  transform: translateX(4px);
-}
-
-
-/* Featured song cards: improve title readability while preserving the neon/pixel look */
-.hero-featured-title {
-  font-family: "Nunito", Arial, sans-serif !important;
-  font-size: 16px !important;
-  font-weight: 900 !important;
-  line-height: 1.35 !important;
-  letter-spacing: 0 !important;
-  text-transform: none !important;
-  color: #fff1fc !important;
-  text-shadow: 0 0 1px rgb(255 241 252 / 20%);
-  overflow-wrap: anywhere;
-}
-.hero-featured-artist {
-  font-family: "Nunito", Arial, sans-serif !important;
-  font-size: 12px !important;
-  font-weight: 700 !important;
-  line-height: 1.45 !important;
-  letter-spacing: .1px !important;
-}
-@media (max-width: 1100px) {
-  .hero-featured-title {
-    font-size: 14px !important;
+/* Keep the mascot large and visible in the narrow layout too. */
+@media (max-width: 760px) {
+  .sidebar {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    padding-bottom: 12px !important;
   }
-  .hero-featured-artist {
-    font-size: 11px !important;
+  .nav-label,
+  .sidebar-rule {
+    display: block !important;
   }
-}
-
-
-/* Align every table heading with its matching track column:
-   # | track | artist | like | add to playlist | duration | remove */
-@media (min-width: 761px) {
-  .table-header,
-  .track-row {
-    grid-template-columns:
-      34px
-      minmax(185px, 1.5fr)
-      minmax(95px, 1fr)
-      34px
-      72px
-      54px
-      26px !important;
-    column-gap: 9px !important;
-  }
-
-  .table-header span:nth-child(4),
-  .table-header span:nth-child(5),
-  .table-header span:nth-child(6),
-  .table-header span:nth-child(7) {
-    text-align: center !important;
-  }
-
-  .table-header span:nth-child(5) {
-    font-family: "Nunito", Arial, sans-serif !important;
-    font-size: 7px !important;
-    font-weight: 800 !important;
-    letter-spacing: .55px !important;
-    white-space: nowrap;
-    color: #d9b9d4 !important;
-  }
-
-  .table-header span:nth-child(6) {
-    font-family: Arial, Helvetica, sans-serif !important;
-    font-size: 9px !important;
-    font-weight: 800 !important;
-    letter-spacing: 1.1px !important;
-    white-space: nowrap;
-    color: #ead3e6 !important;
-  }
-
-  .row-heart { grid-column: 4; }
-  .row-add-playlist { grid-column: 5; }
-  .track-duration { grid-column: 6; text-align: center; }
-  .row-remove { grid-column: 7; }
-}
-
-
-/* Keep the original pixel font for table headings, but improve legibility */
-@media (min-width: 761px) {
-  .table-header span:nth-child(5),
-  .table-header span:nth-child(6) {
-    font-family: "Pixelify Sans", "Nunito", sans-serif !important;
-    font-size: 9px !important;
-    font-weight: 700 !important;
-    letter-spacing: .7px !important;
-    line-height: 1.35 !important;
-    color: #f1d8ee !important;
-    text-shadow: 0 0 1px rgb(241 216 238 / 35%);
-    -webkit-font-smoothing: antialiased;
-    text-rendering: geometricPrecision;
-  }
-  .table-header span:nth-child(5) {
-    font-size: 8px !important;
-    letter-spacing: .45px !important;
-  }
-}
-
-
-/* Repair track table alignment after adding PLAYLISTA and USUŃ headings */
-@media (min-width: 761px) {
-  .table-header,
-  .track-row {
-    grid-template-columns:
-      38px
-      minmax(220px, 1.45fr)
-      minmax(130px, 1fr)
-      42px
-      84px
-      62px
-      52px !important;
-    column-gap: 8px !important;
-    align-items: center !important;
-  }
-
-  /* The play button replaces the row number on hover, so both share column 1. */
-  .row-number,
-  .row-play {
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-    justify-self: center !important;
-  }
-  .track-info { grid-column: 2 !important; min-width: 0 !important; }
-  .track-album { grid-column: 3 !important; min-width: 0 !important; }
-  .row-heart { grid-column: 4 !important; }
-  .row-add-playlist { grid-column: 5 !important; justify-self: center !important; }
-  .track-duration { grid-column: 6 !important; text-align: center !important; }
-  .row-remove { grid-column: 7 !important; justify-self: center !important; }
-
-  .table-header span:nth-child(1) { grid-column: 1 !important; text-align: center !important; }
-  .table-header span:nth-child(2) { grid-column: 2 !important; text-align: left !important; }
-  .table-header span:nth-child(3) { grid-column: 3 !important; text-align: left !important; }
-  .table-header span:nth-child(4),
-  .table-header span:nth-child(5),
-  .table-header span:nth-child(6),
-  .table-header span:nth-child(7) {
-    text-align: center !important;
-    white-space: nowrap !important;
-    font-family: "Pixelify Sans", "Nunito", sans-serif !important;
-    font-size: 9px !important;
-    font-weight: 700 !important;
-    letter-spacing: .55px !important;
-    line-height: 1.35 !important;
-    color: #f1d8ee !important;
-  }
-  .table-header span:nth-child(5) { font-size: 8px !important; }
-}
-
-
-/* Featured recommendation cards: stronger pixel font, matching the readable CZAS heading */
-.hero-featured-title {
-  font-family: "Pixelify Sans", "Press Start 2P", monospace !important;
-  font-size: 15px !important;
-  font-weight: 700 !important;
-  letter-spacing: .15px !important;
-  line-height: 1.45 !important;
-  color: #fff0fc !important;
-  text-shadow: 0 0 1px rgb(255 240 252 / 25%);
-  -webkit-font-smoothing: none !important;
-  font-smooth: never;
-  text-rendering: geometricPrecision;
-}
-.hero-featured-artist {
-  font-family: "Pixelify Sans", "Press Start 2P", monospace !important;
-  font-size: 11px !important;
-  font-weight: 600 !important;
-  letter-spacing: .1px !important;
-  line-height: 1.5 !important;
-  -webkit-font-smoothing: none !important;
-}
-@media (max-width: 1100px) {
-  .hero-featured-title { font-size: 13px !important; }
-  .hero-featured-artist { font-size: 10px !important; }
-}
-
-
-/* FINAL table header alignment fix: one clean row, vertically centered */
-@media (min-width: 761px) {
-  .table-header {
+  #artist-filters-side.mood-list {
     display: grid !important;
-    grid-template-columns:
-      38px
-      minmax(220px, 1.45fr)
-      minmax(130px, 1fr)
-      42px
-      84px
-      62px
-      52px !important;
-    align-items: center !important;
-    min-height: 36px !important;
-    height: 36px !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    box-sizing: border-box !important;
+    max-height: 180px !important;
+    min-height: 50px !important;
   }
-
-  .table-header > span {
-    align-self: center !important;
-    justify-self: stretch !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    height: 100% !important;
-    line-height: 1 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    transform: none !important;
-    white-space: nowrap !important;
+  #user-playlists-menu.user-playlists-menu {
+    max-height: 200px !important;
   }
-
-  .table-header > span:nth-child(2),
-  .table-header > span:nth-child(3) {
-    justify-content: flex-start !important;
+  #playlist-menu-list.playlist-menu-list {
+    max-height: 145px !important;
   }
-
-  .table-header > span:nth-child(5),
-  .table-header > span:nth-child(6),
-  .table-header > span:nth-child(7) {
-    font-family: "Pixelify Sans", "Press Start 2P", monospace !important;
-    font-size: 8px !important;
-    font-weight: 700 !important;
-    letter-spacing: .35px !important;
-    line-height: 1 !important;
-    white-space: nowrap !important;
+  .sidebar #pepe-sound.sidebar-note {
+    display: block !important;
+    width: 170px !important;
+    max-width: 170px !important;
+    min-height: 0 !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+    margin: 20px 0 4px auto !important;
+    flex: 0 0 auto !important;
   }
-
-  .table-header > span:nth-child(7) {
-    font-size: 7px !important;
-  }
-
-  .track-row {
-    grid-template-columns:
-      38px
-      minmax(220px, 1.45fr)
-      minmax(130px, 1fr)
-      42px
-      84px
-      62px
-      52px !important;
-    align-items: center !important;
-  }
-
-  .row-heart,
-  .row-add-playlist,
-  .track-duration,
-  .row-remove {
-    align-self: center !important;
-    justify-self: center !important;
-    margin: 0 !important;
-    transform: none !important;
+  .sidebar .sidebar-footer {
+    display: block !important;
   }
 }
 
-
-/* FIX: legacy rule put the last heading (USUŃ) in column 6 with CZAS.
-   Explicitly assign all three headings to separate columns in the same row. */
-@media (min-width: 761px) {
-  .table-header > span:nth-child(5) {
-    grid-column: 5 !important;
-    grid-row: 1 !important;
-    align-self: center !important;
-    justify-self: stretch !important;
-    white-space: nowrap !important;
-  }
-  .table-header > span:nth-child(6) {
-    grid-column: 6 !important;
-    grid-row: 1 !important;
-    align-self: center !important;
-    justify-self: stretch !important;
-    white-space: nowrap !important;
-  }
-  .table-header > span:nth-child(7),
-  .table-header > span:last-child {
-    grid-column: 7 !important;
-    grid-row: 1 !important;
-    align-self: center !important;
-    justify-self: stretch !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    height: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    white-space: nowrap !important;
-    font-family: "Pixelify Sans", "Press Start 2P", monospace !important;
-    font-size: 7px !important;
-    line-height: 1 !important;
-    letter-spacing: .25px !important;
-  }
+/* Speech bubble remains viewport-positioned by positionPepeBubble() in music-player.js */
+#pepe-bubble:not([hidden]) {
+  position: fixed !important;
+  z-index: 2000 !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: min(280px, calc(100vw - 24px)) !important;
+  min-width: 0 !important;
+  max-width: calc(100vw - 24px) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: calc(100dvh - 24px) !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
 }

@@ -18,20 +18,19 @@ const chajzerSounds = [
   { title: "Dźwięki na zjeżdżalni", text: "„Naprawdę? Naprawdę.”", source: "chajzer/OOOOOO.mp3" },
   { title: "Ślizg", text: "„rooming? Love grooming. Super. Masz świetne nosowe ą”", source: "chajzer/SLIZG.mp3" },
   { title: "Styrta", text: "„Że najchetniej kupowana pizza w Szwecji to pizza z kebabem?”", source: "chajzer/STYRTA.mp3" },
-  { title: "Było już", text: "„Spróbujemy w Szwecji.”", source: "chajzer/mulciak.mp3" },
-  { title: "YoungMulti", text: "„Jest bardzo dobra!”", source: "chajzer/architekjt.mp3" },
-  { title: "Architekt", text: "„Wiesz w ogóle taka ciekawostka...”", source: "chajzer/andrzeju.mp3" },
+  { title: "Young Multi", text: "„Co? Leksiu odszedł? Zobacz Instagrama? SPRAWDZAAAAM! Dziękuję ci za tą informację!”", source: "chajzer/mulciak.mp3" },
+  { title: "Architekt", text: "„Jest bardzo dobra!”", source: "chajzer/architekjt.mp3" },
   { title: "Ale urwał", text: "„Jest bardzo dobra!”", source: "chajzer/aleurwal.mp3" },
   { title: "Andrzeju", text: "„Wiesz w ogóle taka ciekawostka...”", source: "chajzer/andrzeju.mp3" },
   { title: "Tłukło", text: "„ jak świetnie tańczyłaś ”", source: "chajzer/calyczas.mp3" },
-  { title: "Piotr Żyła", text: "„No. Jadłaś kiedyś pizzę z kebabem?”", source: "chajzer/corka.mp3" },
+  { title: "Piotr Żyła", text: "„Córka zeżarła kostkę do kibla i trzeba było jechać do szpitala.”", source: "chajzer/corka.mp3" },
   { title: "Co to się staneło?", text: "„Khu Khu. O... Kaszelek, kaszelek.”", source: "chajzer/coto.mp3" },
-  { title: "Kierunkowskaz", text: "„Naprawdę? Naprawdę.”", source: "chajzer/kierunkowskaz.mp3" },
-  { title: "MATKO JEDYNA", text: "„końcu? Love grooming? Love grooming.”", source: "chajzer/matkojedyna.mp3" },
-  { title: "Pasztet", text: "„Że najchetniej ku”", source: "chajzer/PASZTET.mp3" },
-  { title: "Babciu", text: "„Spróbujemy w Szwecji.”", source: "chajzer/TOJEST.mp3" },
-  { title: "Weź się tato!", text: "„No. Jadłaś kiedyś pizzę z kebabem?”", source: "chajzer/wezsietato.mp3" },
-  { title: "Zawracanie", text: "„Khu Khu. O... Kaszelek, kaszelek.”", source: "chajzer/zawracanie.mp3" }
+  { title: "Kierunkowskaz", text: "„Ale kierunkowskazu nie włączasz.”", source: "chajzer/kierunkowskaz.mp3" },
+  { title: "MATKO JEDYNA", text: "„Jedź... Matko jedyna! Matko jedyna! Nie no idziesz do domu!”", source: "chajzer/matkojedyna.mp3" },
+  { title: "Pasztet", text: "„Znowu z tym pasztetem?”", source: "chajzer/PASZTET.mp3" },
+  { title: "Babciu", text: "„Babciu, to jest zarąbiste!”", source: "chajzer/TOJEST.mp3" },
+  { title: "Weź się tato!", text: "„A weź się tato..”", source: "chajzer/wezsietato.mp3" },
+  { title: "Zawracanie", text: "„Robimy na rondzie zawracanie. Zawracanie? No, takie trudne?”", source: "chajzer/zawracanie.mp3" }
 ];
 const audio = document.querySelector("#audio");
 const trackList = document.querySelector("#track-list");

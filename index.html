@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#100914" />
-    <link rel="icon" type="image/svg+xml" href="multikpop-icon.svg" />
     <title>Multi Kpop</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -174,7 +173,7 @@
       <form id="add-track-form" class="add-track-form">
         <div class="dialog-heading"><div><p class="section-kicker">TWOJA PLAYLISTA</p><h2>Dodaj utwór</h2></div><button id="close-dialog" class="dialog-close" type="button" aria-label="Zamknij">×</button></div>
         <label>Tytuł piosenki<input id="track-title-input" name="title" type="text" maxlength="120" required placeholder="np. ulubiony kawałek" /></label>
-        <label>Wykonawca / wykonawcy<input id="track-artist-input" name="artist" type="text" maxlength="160" required placeholder="np. Young Multi, J.Y. Park" /><small class="form-note">Kilku wykonawców oddziel przecinkami, np. Artysta 1, Artysta 2.</small></label>
+        <label>Wykonawca<input id="track-artist-input" name="artist" type="text" maxlength="100" required placeholder="np. J.Y. Park" /></label>
         <label>Plik MP3<input id="audio-file-input" name="audio" type="file" accept="audio/mpeg,.mp3" required /></label>
         <label>Miniaturka (opcjonalnie)<input id="artwork-file-input" name="artwork" type="file" accept="image/*" /></label>
         <p class="form-note">Czas utworu pobierze się z MP3. Możesz też dodać plik i miniaturkę przez music/library.js.</p>

@@ -21,8 +21,6 @@ const chajzerSounds = [
   { title: "Young Multi", text: "„Co? Leksiu odszedł? Zobacz Instagrama? SPRAWDZAAAAM! Dziękuję ci za tą informację!”", source: "chajzer/mulciak.mp3" },
   { title: "Architekt", text: "„Jest bardzo dobra!”", source: "chajzer/architekjt.mp3" },
   { title: "Było już", text: "„Spróbujemy w Szwecji.”", source: "chajzer/BYLOJUZ.mp3" },
-  { title: "Young Multi", text: "„Spróbujemy w Szwecji.”", source: "chajzer/mulciak.mp3" },
-  { title: "Architekt", text: "„Jest bardzo dobra!”", source: "chajzer/architekjt.mp3" },
   { title: "Ale urwał", text: "„Jest bardzo dobra!”", source: "chajzer/aleurwal.mp3" },
   { title: "Andrzeju", text: "„Wiesz w ogóle taka ciekawostka...”", source: "chajzer/andrzeju.mp3" },
   { title: "Tłukło", text: "„ jak świetnie tańczyłaś ”", source: "chajzer/calyczas.mp3" },

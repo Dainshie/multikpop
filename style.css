@@ -1318,260 +1318,137 @@ html[data-theme="light"] .hero-art-image::after {
 }
 
 
-/* FIX: scroll only the artist and playlist lists, not the entire sidebar */
-@media (min-width: 761px) {
-  .app-shell > .sidebar {
-    overflow: visible !important;
-    scrollbar-width: none !important;
-  }
-  .app-shell > .sidebar::-webkit-scrollbar { display: none !important; }
-  #artist-filters-side.mood-list {
+/* === TARGETED REPAIR: restore Pepe and pin previous/next previews to the far edges === */
+
+/* Desktop player layout follows the actual DOM order:
+   now-playing, previous preview, controls, next preview, volume. */
+@media (min-width: 1101px) {
+  .player {
     display: grid !important;
-    gap: 5px !important;
-    max-height: min(30vh, 250px) !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    overscroll-behavior: contain;
-    scrollbar-width: thin !important;
-    scrollbar-color: #a83998 #170d20 !important;
-    padding-right: 4px !important;
+    grid-template-columns:
+      minmax(180px, 1fr)
+      minmax(180px, 1fr)
+      minmax(280px, 1.5fr)
+      minmax(180px, 1fr)
+      minmax(180px, 1fr) !important;
+    column-gap: 18px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
-  #artist-filters-side::-webkit-scrollbar,
-  #playlist-menu-list::-webkit-scrollbar { width: 6px !important; }
-  #artist-filters-side::-webkit-scrollbar-track,
-  #playlist-menu-list::-webkit-scrollbar-track { background: #170d20 !important; }
-  #artist-filters-side::-webkit-scrollbar-thumb,
-  #playlist-menu-list::-webkit-scrollbar-thumb {
-    background: #a83998 !important;
-    border: 1px solid #f04acb !important;
+
+  .player > .queue-preview-prev {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+    width: 100% !important;
+    max-width: 240px !important;
+    margin: 0 !important;
   }
-  #playlist-menu-list {
-    max-height: min(24vh, 190px) !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    overscroll-behavior: contain;
-    scrollbar-width: thin !important;
-    scrollbar-color: #a83998 #170d20 !important;
-    padding-right: 4px !important;
+
+  .player > .now-playing {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    justify-self: stretch !important;
+  }
+
+  .player > .player-center {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    justify-self: stretch !important;
+  }
+
+  .player > .player-volume {
+    grid-column: 4 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    justify-self: stretch !important;
+  }
+
+  .player > .queue-preview-next {
+    grid-column: 5 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    width: 100% !important;
+    max-width: 240px !important;
+    margin: 0 !important;
   }
 }
 
-/* On small screens keep the artist and playlist lists independently scrollable. */
-@media (max-width: 760px) {
+/* Keep the mascot visible at the bottom of the sidebar, outside the scrolling lists. */
+@media (min-width: 761px) {
   .app-shell > .sidebar {
+    display: flex !important;
+    flex-direction: column !important;
+    height: calc(100vh - 80px) !important;
+    max-height: calc(100vh - 80px) !important;
+    min-height: 0 !important;
     overflow: visible !important;
-    height: auto !important;
-    max-height: none !important;
   }
-  #artist-filters-side.mood-list {
-    display: grid !important;
-    max-height: 180px !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    scrollbar-width: thin !important;
-    scrollbar-color: #a83998 #170d20 !important;
-  }
-  #playlist-menu-list {
-    max-height: 150px !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    scrollbar-width: thin !important;
-    scrollbar-color: #a83998 #170d20 !important;
-  }
-  /* The mobile layout previously hid the Pepe button and its bubble. */
-  .app-shell > .sidebar .sidebar-note {
+
+  .app-shell > .sidebar #pepe-sound.sidebar-note {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     position: relative !important;
-    width: 112px !important;
-    max-width: 112px !important;
-    height: 112px !important;
-    min-height: 112px !important;
+    flex: 0 0 auto !important;
+    align-self: flex-end !important;
+    width: min(100%, 190px) !important;
+    max-width: 190px !important;
+    height: auto !important;
+    min-height: 0 !important;
     aspect-ratio: 1 / 1 !important;
-    margin: 16px auto 8px !important;
-    flex: 0 0 112px !important;
+    margin: auto 0 8px auto !important;
     transform: none !important;
+    background-color: transparent !important;
+    background-image: url("pepe-emote-user-image.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    border: 0 !important;
+    box-shadow: none !important;
   }
-}
 
-/* Bubble is positioned from the Pepe button by JS, so it stays beside the frog. */
-#pepe-bubble:not([hidden]) {
-  position: fixed !important;
-  z-index: 2000 !important;
-  right: auto !important;
-  bottom: auto !important;
-  width: min(280px, calc(100vw - 24px)) !important;
-  min-width: 0 !important;
-  max-width: calc(100vw - 24px) !important;
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: calc(100dvh - 24px) !important;
-  overflow: visible !important;
-  box-sizing: border-box !important;
-}
-#pepe-bubble::after { display: block !important; }
-@media (max-width: 900px) {
-  #pepe-bubble:not([hidden]) { width: min(280px, calc(100vw - 24px)) !important; }
-}
-
-
-/* === FINAL SIDEBAR LAYOUT: only artists/playlists scroll; Pepe stays large at the corner === */
-.sidebar {
-  position: sticky !important;
-  top: 0 !important;
-  align-self: start !important;
-  display: flex !important;
-  flex-direction: column !important;
-  height: calc(100dvh - 80px) !important;
-  max-height: calc(100dvh - 80px) !important;
-  min-height: 0 !important;
-  overflow: visible !important;
-  scrollbar-width: none !important;
-  box-sizing: border-box !important;
-}
-.sidebar::-webkit-scrollbar {
-  display: none !important;
-}
-
-/* Artist list gets its own scrollbar */
-#artist-filters-side.mood-list {
-  display: grid !important;
-  flex: 0 1 auto !important;
-  min-height: 70px !important;
-  max-height: min(24vh, 220px) !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  overscroll-behavior: contain !important;
-  scrollbar-width: thin !important;
-  scrollbar-color: #a83998 #170d20 !important;
-  padding-right: 5px !important;
-}
-
-/* Playlist section is compact; only its entries scroll */
-#user-playlists-menu.user-playlists-menu {
-  display: flex !important;
-  flex-direction: column !important;
-  flex: 0 1 auto !important;
-  min-height: 0 !important;
-  max-height: min(29vh, 245px) !important;
-  overflow: hidden !important;
-}
-#playlist-menu-list.playlist-menu-list {
-  flex: 0 1 auto !important;
-  min-height: 38px !important;
-  max-height: min(23vh, 190px) !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  overscroll-behavior: contain !important;
-  scrollbar-width: thin !important;
-  scrollbar-color: #a83998 #170d20 !important;
-  padding-right: 5px !important;
-}
-
-#artist-filters-side::-webkit-scrollbar,
-#playlist-menu-list::-webkit-scrollbar {
-  width: 6px !important;
-}
-#artist-filters-side::-webkit-scrollbar-track,
-#playlist-menu-list::-webkit-scrollbar-track {
-  background: #170d20 !important;
-}
-#artist-filters-side::-webkit-scrollbar-thumb,
-#playlist-menu-list::-webkit-scrollbar-thumb {
-  background: #a83998 !important;
-  border: 1px solid #f04acb !important;
-}
-
-/* Large Pepe anchored at the bottom corner, outside the scrolling lists */
-.sidebar #pepe-sound.sidebar-note {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: relative !important;
-  align-self: flex-end !important;
-  flex: 0 0 auto !important;
-  width: clamp(150px, 78%, 205px) !important;
-  max-width: 205px !important;
-  height: auto !important;
-  min-height: 0 !important;
-  aspect-ratio: 1 / 1 !important;
-  margin: auto 0 4px auto !important;
-  transform: none !important;
-  padding: 0 !important;
-  background-image: url("pepe-emote-user-image.png") !important;
-  background-position: center !important;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  overflow: visible !important;
-}
-.sidebar #pepe-sound .note-mark,
-.sidebar #pepe-sound p,
-.sidebar #pepe-sound .note-sparkle {
-  display: none !important;
-}
-.sidebar .sidebar-footer {
-  flex: 0 0 auto !important;
-  margin: 0 0 2px 3px !important;
-}
-
-/* Keep the mascot large and visible in the narrow layout too. */
-@media (max-width: 760px) {
-  .sidebar {
-    position: relative !important;
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    min-height: 0 !important;
-    overflow: visible !important;
-    padding-bottom: 12px !important;
+  .app-shell > .sidebar #pepe-sound .note-mark,
+  .app-shell > .sidebar #pepe-sound p,
+  .app-shell > .sidebar #pepe-sound .note-sparkle {
+    display: none !important;
   }
-  .nav-label,
-  .sidebar-rule {
-    display: block !important;
-  }
-  #artist-filters-side.mood-list {
-    display: grid !important;
-    max-height: 180px !important;
-    min-height: 50px !important;
-  }
-  #user-playlists-menu.user-playlists-menu {
-    max-height: 200px !important;
-  }
-  #playlist-menu-list.playlist-menu-list {
-    max-height: 145px !important;
-  }
-  .sidebar #pepe-sound.sidebar-note {
-    display: block !important;
-    width: 170px !important;
-    max-width: 170px !important;
-    min-height: 0 !important;
-    height: auto !important;
-    aspect-ratio: 1 / 1 !important;
-    margin: 20px 0 4px auto !important;
+
+  .app-shell > .sidebar .sidebar-footer {
     flex: 0 0 auto !important;
   }
-  .sidebar .sidebar-footer {
-    display: block !important;
-  }
 }
 
-/* Speech bubble remains viewport-positioned by positionPepeBubble() in music-player.js */
-#pepe-bubble:not([hidden]) {
-  position: fixed !important;
-  z-index: 2000 !important;
-  right: auto !important;
-  bottom: auto !important;
-  width: min(280px, calc(100vw - 24px)) !important;
-  min-width: 0 !important;
-  max-width: calc(100vw - 24px) !important;
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: calc(100dvh - 24px) !important;
-  overflow: visible !important;
-  box-sizing: border-box !important;
+/* On small screens, keep Pepe available too; do not hide the button in the mobile rule. */
+@media (max-width: 760px) {
+  .app-shell > .sidebar #pepe-sound.sidebar-note {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 116px !important;
+    max-width: 116px !important;
+    height: 116px !important;
+    min-height: 0 !important;
+    aspect-ratio: 1 / 1 !important;
+    margin: 12px 0 4px auto !important;
+    padding: 0 !important;
+    background-color: transparent !important;
+    background-image: url("pepe-emote-user-image.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .app-shell > .sidebar #pepe-sound .note-mark,
+  .app-shell > .sidebar #pepe-sound p,
+  .app-shell > .sidebar #pepe-sound .note-sparkle {
+    display: none !important;
+  }
 }

@@ -1452,3 +1452,301 @@ html[data-theme="light"] .hero-art-image::after {
     display: none !important;
   }
 }
+
+
+/* ==========================================================
+   MultiKpop final repair based on the uploaded project:
+   - artist and playlist lists scroll independently
+   - Pepe stays visible at the bottom of the sidebar
+   - hero copy never overlaps the featured tracks
+   - light theme cards and Pepe bubble use light colors
+   - table headings stay on one row (including USUŃ)
+   ========================================================== */
+
+/* Sidebar is a fixed-height column; only the two lists below may scroll. */
+@media (min-width: 761px) {
+  .app-shell > .sidebar {
+    position: sticky !important;
+    top: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: calc(100vh - 80px) !important;
+    max-height: calc(100vh - 80px) !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    padding-bottom: 10px !important;
+    scrollbar-width: none !important;
+  }
+
+  .app-shell > .sidebar::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .app-shell > .sidebar .brand {
+    flex: 0 0 auto !important;
+    margin-bottom: 30px !important;
+  }
+
+  .app-shell > .sidebar .nav-label,
+  .app-shell > .sidebar .main-nav,
+  .app-shell > .sidebar .sidebar-rule {
+    flex: 0 0 auto !important;
+  }
+
+  .app-shell > .sidebar .sidebar-rule {
+    margin-top: 20px !important;
+    margin-bottom: 16px !important;
+  }
+
+  #artist-filters-side.mood-list {
+    display: grid !important;
+    flex: 0 1 auto !important;
+    min-height: 40px !important;
+    max-height: min(18vh, 150px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain !important;
+    padding-right: 5px !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #a83998 #170d20 !important;
+  }
+
+  #user-playlists-menu.user-playlists-menu {
+    display: flex !important;
+    flex: 0 1 auto !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    max-height: min(24vh, 190px) !important;
+    overflow: hidden !important;
+  }
+
+  #playlist-menu-list.playlist-menu-list {
+    display: grid !important;
+    flex: 0 1 auto !important;
+    min-height: 40px !important;
+    max-height: min(17vh, 130px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain !important;
+    padding-right: 5px !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #a83998 #170d20 !important;
+  }
+
+  #artist-filters-side::-webkit-scrollbar,
+  #playlist-menu-list::-webkit-scrollbar {
+    width: 6px !important;
+  }
+
+  #artist-filters-side::-webkit-scrollbar-track,
+  #playlist-menu-list::-webkit-scrollbar-track {
+    background: #170d20 !important;
+  }
+
+  #artist-filters-side::-webkit-scrollbar-thumb,
+  #playlist-menu-list::-webkit-scrollbar-thumb {
+    background: #a83998 !important;
+    border: 1px solid #f04acb !important;
+  }
+
+  .app-shell > .sidebar #pepe-sound.sidebar-note {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 2 !important;
+    flex: 0 0 auto !important;
+    align-self: flex-end !important;
+    width: min(100%, 178px) !important;
+    max-width: 178px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 1 / 1 !important;
+    margin: auto 0 5px auto !important;
+    padding: 0 !important;
+    transform: none !important;
+    background-color: transparent !important;
+    background-image: url("pepe-emote-user-image.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .app-shell > .sidebar #pepe-sound .note-mark,
+  .app-shell > .sidebar #pepe-sound p,
+  .app-shell > .sidebar #pepe-sound .note-sparkle {
+    display: none !important;
+  }
+
+  .app-shell > .sidebar .sidebar-footer {
+    display: block !important;
+    flex: 0 0 auto !important;
+    margin: 0 0 2px 3px !important;
+  }
+}
+
+/* On narrow screens show the sidebar content too; lists still scroll separately. */
+@media (max-width: 760px) {
+  .app-shell > .sidebar {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    padding: 13px 18px 12px !important;
+  }
+
+  .app-shell > .sidebar .nav-label,
+  .app-shell > .sidebar .sidebar-rule,
+  .app-shell > .sidebar .mood-list,
+  .app-shell > .sidebar #pepe-sound.sidebar-note,
+  .app-shell > .sidebar .sidebar-footer {
+    display: block !important;
+  }
+
+  .app-shell > .sidebar .brand {
+    margin-bottom: 20px !important;
+  }
+
+  #artist-filters-side.mood-list {
+    display: grid !important;
+    max-height: 140px !important;
+    min-height: 40px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  #user-playlists-menu.user-playlists-menu {
+    display: flex !important;
+    max-height: 170px !important;
+    overflow: hidden !important;
+  }
+
+  #playlist-menu-list.playlist-menu-list {
+    display: grid !important;
+    max-height: 115px !important;
+    min-height: 38px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .app-shell > .sidebar #pepe-sound.sidebar-note {
+    display: block !important;
+    width: 138px !important;
+    max-width: 138px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 1 / 1 !important;
+    margin: 18px 0 5px auto !important;
+    flex: 0 0 auto !important;
+    background-image: url("pepe-emote-user-image.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .app-shell > .sidebar #pepe-sound .note-mark,
+  .app-shell > .sidebar #pepe-sound p,
+  .app-shell > .sidebar #pepe-sound .note-sparkle {
+    display: none !important;
+  }
+}
+
+/* The speech bubble is positioned using viewport coordinates by music-player.js. */
+#pepe-bubble[hidden] {
+  display: none !important;
+}
+#pepe-bubble:not([hidden]) {
+  position: fixed !important;
+  z-index: 2000 !important;
+  min-width: 0 !important;
+  width: min(280px, calc(100vw - 24px)) !important;
+  max-width: calc(100vw - 24px) !important;
+  box-sizing: border-box !important;
+}
+
+/* Light mode: don't leave the recommended songs or Pepe speech bubble dark. */
+html[data-theme="light"] .hero-featured-track {
+  background: #fff8ff !important;
+  border-color: #d6a6d8 !important;
+  color: #38243e !important;
+  box-shadow: 3px 3px 0 #ead1e8 !important;
+}
+html[data-theme="light"] .hero-featured-track:hover,
+html[data-theme="light"] .hero-featured-track:focus-visible {
+  background: #f9e8f7 !important;
+  border-color: #e64bb7 !important;
+  color: #38243e !important;
+}
+html[data-theme="light"] .hero-featured-cover {
+  background: #fffaff !important;
+  border-color: #d65ab7 !important;
+}
+html[data-theme="light"] .hero-featured-title {
+  color: #38243e !important;
+}
+html[data-theme="light"] .hero-featured-artist {
+  color: #806084 !important;
+}
+html[data-theme="light"] .pepe-bubble {
+  background: #fff8ff !important;
+  color: #38243e !important;
+  border-color: #d65ab7 !important;
+  box-shadow: 5px 5px 0 #e8c9e5, 0 0 18px rgb(214 90 183 / 10%) !important;
+}
+html[data-theme="light"] .pepe-bubble::after {
+  background: #fff8ff !important;
+  border-color: #d65ab7 !important;
+}
+html[data-theme="light"] .pepe-bubble-kicker { color: #008da5 !important; }
+html[data-theme="light"] .pepe-bubble-title { color: #d52b9b !important; }
+html[data-theme="light"] .pepe-bubble-text { color: #55415b !important; }
+html[data-theme="light"] .pepe-bubble-status { color: #87688e !important; }
+html[data-theme="light"] .pepe-bubble-close { color: #b42c8d !important; }
+
+/* Keep long randomized hero headings inside their own column, away from the cards. */
+@media (min-width: 761px) {
+  .hero-copy {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  .hero h1 {
+    max-width: 100% !important;
+    font-size: clamp(30px, 2.45vw, 40px) !important;
+    line-height: 1.08 !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+  }
+  .hero h1 em {
+    display: inline !important;
+    overflow-wrap: anywhere !important;
+  }
+}
+
+/* Seven actual columns match the seven headings and the seven visible row controls.
+   This keeps USUŃ centered above the X instead of wrapping below CZAS. */
+@media (min-width: 761px) {
+  .table-header,
+  .track-row {
+    grid-template-columns: 34px minmax(185px, 1.5fr) minmax(95px, 1fr) 34px 54px 54px 26px !important;
+  }
+  .table-header {
+    align-items: center !important;
+    min-height: 34px !important;
+    height: auto !important;
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+    line-height: 1.2 !important;
+  }
+  .table-header span:nth-last-child(-n+4) {
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+}
